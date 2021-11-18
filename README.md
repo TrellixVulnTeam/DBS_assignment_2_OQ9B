@@ -1,3 +1,6 @@
+## Run npm install to install all modules
+
+
 npm install styled-components,
 npm install react-icons,
 npm install react-multi-carousel,
