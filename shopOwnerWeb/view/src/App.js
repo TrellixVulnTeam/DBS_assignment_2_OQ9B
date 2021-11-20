@@ -15,7 +15,7 @@ function App() {
     <div className="App">
     <BrowserRouter>
       <Header />
-        
+          <div className='p-5'>
           <Routes>
            {
              routes.map((route, index) => {
@@ -23,7 +23,7 @@ function App() {
              })
            }
           </Routes>
-        
+          </div>
       <Footer />
       </BrowserRouter>
     </div>

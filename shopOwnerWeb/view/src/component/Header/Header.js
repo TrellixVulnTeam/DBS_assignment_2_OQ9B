@@ -5,7 +5,7 @@ const Header = props => {
 
 
     return (
-        <nav className='navbar navbar-expand-lg navbar-dark bg-info p-2'>
+        <nav className='navbar navbar-expand-lg navbar-dark bg-main p-2'>
 
             <h3 className='nav-brand text-white col-md-3 d-flex justify-content-start'>HCMUTshopee</h3>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,12 @@ const Header = props => {
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav mx-auto row">
                     <li className="nav-item active">
-                        <Link className="nav-link" to='/'>Trang chủ</Link>
+                        <Link className="nav-link" to='/'>
+                            <i class="fas fa-home"></i>
+                        Trang chủ</Link>
+                    </li>
+                    <li className="nav-item active">
+                        <Link className="nav-link" to='/add-product'>Thêm mới</Link>
                     </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">

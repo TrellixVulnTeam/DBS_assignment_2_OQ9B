@@ -7,7 +7,7 @@ const Footer = props => {
 
 
     return (
-    <footer className="text-center text-lg-start bg-light text-muted fixed-bottom">
+    <footer className="text-center text-lg-start bg-light text-muted">
       
       <section className="border border-top">
         <div className="container text-center text-md-start mt-5">

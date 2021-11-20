@@ -1,4 +1,4 @@
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/Home/HomePage";
 import SignInPage from "./pages/SignInPage";
 
 export default [
