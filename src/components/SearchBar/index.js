@@ -25,12 +25,12 @@ const SearchBar = () => {
       <Nav>
         <Logo>
           <NavLogo to="/home">
-            <LogoName>BKIS</LogoName>
             <ShopName>
               Bach Khoa
               <br />
-              InstrumentShop
+              E-Commerce
             </ShopName>
+            <LogoName><i class="fas fa-shopping-bag"></i></LogoName>
           </NavLogo>
         </Logo>
         <SearchNav>
@@ -43,16 +43,11 @@ const SearchBar = () => {
           </SearchBtn>
         </SearchNav>
         <NavMenu>
-          <NavLink to="/">
-            <NavIcon className="fas fa-map-marker-alt"></NavIcon>
-            <NavLinkText>Showroom</NavLinkText>
-          </NavLink>
-          <NavLink to="/contact">
-            <NavIcon className="fas fa-phone-alt"></NavIcon>
-            <NavLinkText>0123.456.789</NavLinkText>
-          </NavLink>
           <NavLink to="/cart">
             <NavIcon className="fas fa-shopping-cart"></NavIcon>
+          </NavLink>
+          <NavLink to="/login">
+            <NavIcon className="fas fa-user"></NavIcon>
           </NavLink>
         </NavMenu>
       </Nav>

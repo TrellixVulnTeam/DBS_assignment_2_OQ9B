@@ -1,47 +1,48 @@
 CREATE TABLE `transaction` (
-  `transactionId` varchar(9) NOT NULL,
+  `transactionId` int(11) NOT NULL AUTO_INCREMENT,
   `deliverAddress` varchar(255) NOT NULL,
   `promotionCode` varchar(255),
   `customerId` varchar(9) NOT NULL,
   CONSTRAINT `transaction_pk` PRIMARY KEY (`transactionId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `transaction` (`transactionId`, `deliverAddress`, `promotionCode`, `customerId`)
-VALUES ('100000', 'KTX khu A ĐHQG TP. Hồ Chí Minh', 'ABCXYZ123', '100210');
+SET @@auto_increment_increment = 1;
+
+INSERT INTO `transaction` (`deliverAddress`, `promotionCode`, `customerId`)
+VALUES ('KTX khu A ĐHQG TP. Hồ Chí Minh', 'ABCXYZ123', '100210');
 
 INSERT INTO `transaction` (`transactionId`, `deliverAddress`, `promotionCode`, `customerId`)
 VALUES ('100090', 'KTX khu A ĐHQG TP. Hồ Chí Minh', 'ABCXYZ123', '100211');
 
 CREATE TABLE `order` (
-  `oTransactionId` varchar(9) NOT NULL,
-  `orderId` varchar(9) NOT NULL,
+  `oTransactionId` int(11) NOT NULL,
+  `orderId` int(11) NOT NULL,
   `totalPrice` double precision(10,2) NOT NULL,
   `orderStatus` varchar(255) NOT NULL,
-  `paymentTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `paymentTime` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   CONSTRAINT `order_pk` PRIMARY KEY (`oTransactionId`, `orderId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 ALTER TABLE `order` ADD CONSTRAINT `included` FOREIGN KEY (`oTransactionId`) REFERENCES `transaction`(`transactionId`) ON DELETE CASCADE; 
 
 INSERT INTO `order` (`oTransactionId`, `orderId`, `totalPrice`, `orderStatus`)
-VALUES ('100090', '100134', 112500, 'Đang giao');
+VALUES (1, 1, 112500, 'Đang giao');
 
 CREATE TABLE `company` (
-	  `companyId` varchar(9) NOT NULL,
+	  `companyId` int(11) NOT NULL AUTO_INCREMENT,
     `companyName` varchar(255) NOT NULL,
     CONSTRAINT `company_pk` PRIMARY KEY (`companyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO company (companyId, companyName)
+INSERT INTO company (companyName)
 VALUES (
-    '100902',
     'HCMUT'
   );
   
 CREATE TABLE `deliver` (
-  `dCompanyId` varchar(9) NOT NULL,
-  `dTransactionId` varchar(9) NOT NULL,
-  `dOrderId` varchar(9) NOT NULL,
+  `dCompanyId` int(11) NOT NULL,
+  `dTransactionId` int(11) NOT NULL,
+  `dOrderId` int(11) NOT NULL,
   `dOrderStatus` varchar(255) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
@@ -59,9 +60,9 @@ INSERT INTO deliver (
     endDate
   )
 VALUES (
-    '100902',
-    '100090',
-    '100134',
+    1,
+    1,
+    1,
     'Đang giao',
     '2021-11-16',
     '2021-11-18'
@@ -69,7 +70,7 @@ VALUES (
 
 
 CREATE TABLE `contact` (
-	  `dCompanyId` varchar(9) NOT NULL,
+	  `dCompanyId` int(11) NOT NULL,
     `phoneNum` varchar(11) NOT NULL,
     `dCompanyAddr` varchar(255) NOT NULL,
     CONSTRAINT `contact_pk` PRIMARY KEY (`dCompanyId`, `phoneNum`),
@@ -78,13 +79,13 @@ CREATE TABLE `contact` (
 
 INSERT INTO contact (dCompanyId, phoneNum, dCompanyAddr)
 VALUES (
-    '100902',
+    1,
     '0983411642',
     'Ho Chi Minh city'
   );
 INSERT INTO contact (dCompanyId, phoneNum, dCompanyAddr)
 VALUES (
-    '100902',
+    1,
     '076357378',
     'Ho Chi Minh city'
   );

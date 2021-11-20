@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { homePianoList } from "../data/HomePage/piano_data";
 import { homeGuitarList } from "../data/HomePage/guitar_data";
 import { homeTrendingList } from "../data/HomePage/trending_data";
+import { Consumer } from "../components/products/content";
+import Shop from "../components/shop/shops";
 import ProductListSlide from "../components/homeComponents/productListSlide/productListSlide";
 import HomeAdvertisements from "../components/homeComponents/homeAdvertisements";
 
@@ -19,12 +21,18 @@ export default class Home extends Component {
     return (
       <>
         <div className="container">
-          <HomeAdvertisements
-            advertisement1={ad1}
-            advertisement2={ad2}
-            advertisement3={ad3}
-            advertisement4={ad4}
-          />
+          <div className="row mx-0">
+            <h3 style={{ fontWeight: "bold" }}>Danh mục cửa hàng</h3>
+            <Consumer>
+              {value => {
+                return value.shops.map(shop => {
+                  return <Shop key={shop.id} shop={shop} />
+                })
+              }}
+            </Consumer>
+          </div>
+        </div>
+        <div className="container">
           <ProductListSlide
             title="Sản phẩm nổi bật"
             dataList={homeTrendingList}
