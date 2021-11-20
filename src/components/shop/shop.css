@@ -1,0 +1,25 @@
+.shop-card-container {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  justify-content: center !important;
+}
+
+.shop-card-container .shop-img-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff !important;
+}
+
+.shop-card-container .shop-img-container img {
+  width: 100% !important;
+  height: 100px !important;
+}
+
+.shop-card-container .shop-name {
+  text-align: center;
+}
+
+.shop-card-container .shop-name h5 {
+  text-decoration: none !important;
+  color: #000;
+  font-weight: 600;
+}

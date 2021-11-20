@@ -11,6 +11,7 @@ import Contact from "./pages/contact";
 import Installment from "./pages/installment";
 import Payment from "./pages/payment";
 import Cart from "./pages/cart";
+import Login from "./pages/login";
 import { FooterContainer } from "./container/footer";
 import SearchBar from "./components/SearchBar";
 import ProductList from "./pages/product_list";
@@ -24,7 +25,6 @@ function App() {
     <div>
       <Provider>
         <SearchBar />
-        <Navbar />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/home" exact component={Home} />
@@ -39,13 +39,13 @@ function App() {
           <Route path="/cart" exact component={Cart} />
           <Route path="/products/one-product/id_product/:id" exact component={ProductInfo} />
           <Route path="/payment" exact component={Payment} />
+          <Route path="/login" exact component={Login} />
         </Switch>
-        <FooterContainer />
         <SortModal />
         <FilterByBrandModal />
         <FilterByPriceModal />
       </Provider>
-    </div>
+    </div >
   );
 }
 

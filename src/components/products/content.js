@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import parseNumber from "./parseNumber";
 import { priceTag } from "./../../data/ProductData/priceTags"
 import { productType } from "../../data/ProductData/productTypes";
+import { shops } from "../../data/shopData/shopData"
 const Context = React.createContext();
 
 class Provider extends Component {
@@ -12,7 +13,8 @@ class Provider extends Component {
     modalOpen: false,
     filterBrandModal: false,
     filterPriceModal: false,
-    productType: productType[0]
+    productType: productType[0],
+    shops: shops
   };
 
   setProducts = (data) => {
