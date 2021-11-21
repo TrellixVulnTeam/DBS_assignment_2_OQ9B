@@ -15,7 +15,7 @@ module.exports = (app) => {
         
         console.log(req.body);
         const data = {
-            shopOwnerID: req.body.shopOwnerID,
+            ownerID: req.body.ownerID,
             amount: req.body.amount,
             name: req.body.name,
             description: req.body.description,

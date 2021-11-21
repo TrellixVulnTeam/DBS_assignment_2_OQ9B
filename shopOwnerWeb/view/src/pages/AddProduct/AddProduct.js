@@ -4,7 +4,7 @@ import { addProduct } from '../../api/services';
 const AddProduct = props => {
 
     const nameRef = useRef();
-    const shopOwnerIDRef = useRef();
+    const ownerIDRef = useRef();
     const imageURLRef = useRef();
     const priceRef = useRef();
     const amountRef = useRef();
@@ -14,7 +14,7 @@ const AddProduct = props => {
     const handleOnSubmit = async () => {
 
       const data = {
-        shopOwnerID: shopOwnerIDRef.current.value,
+        ownerID: ownerIDRef.current.value,
         amount: amountRef.current.value,
         name: nameRef.current.value,
         description: descriptionRef.current.value,
@@ -25,7 +25,7 @@ const AddProduct = props => {
 
       await addProduct(data)
       .then(result => {
-        shopOwnerIDRef.current.value = '';
+        ownerIDRef.current.value = '';
         amountRef.current.value = '';
         nameRef.current.value = '';
         descriptionRef.current.value = '';
@@ -43,7 +43,7 @@ const AddProduct = props => {
         </div>
         <form className='mt-5'>
           <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập ID của chủ cửa hàng" ref={shopOwnerIDRef}/>
+            <input type="number" class="form-control p-3 text-center" placeholder="Nhập ID của chủ cửa hàng" ref={ownerIDRef}/>
           </div>
           <div class="form-group d-flex flex-row">
             <input type="text" class="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' ref={nameRef}/>

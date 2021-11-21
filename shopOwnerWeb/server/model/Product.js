@@ -18,8 +18,8 @@ module.exports = {
 
     add: (data, callback) => 
     {
-        const sql = `INSERT INTO product (shopOwnerID, amount, name, description, price, type, imageURL)  
-        VALUES ("${data.shopOwnerID}", "${data.amount}", "${data.name}", 
+        const sql = `INSERT INTO product (ownerID, amount, name, description, price, type, imageURL)  
+        VALUES ("${data.ownerID}", "${data.amount}", "${data.name}", 
         "${data.description}", "${data.price}", "${data.type}", "${data.imageURL}")`;
         console.log(sql);
         query.awaitQuery(sql).then(result => callback(true))
