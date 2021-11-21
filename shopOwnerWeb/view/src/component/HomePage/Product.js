@@ -19,11 +19,12 @@ const Product = ({product}) => {
             <div class="card-body">
 
 
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-            <a href="#" class="btn bg-main text-white">Button</a>
-
+            <h4 class="card-title">{product.name}</h4>
+            {/* <p class="card-text">{product.description.substring(0, 50)}</p> */}
+            <div className='d-flex flex-column w-75 mx-auto'>
+            <button className='btn bg-main text-white mb-1'><i class="fas fa-edit"></i></button>
+            <button className='btn btn-danger'><i class="fas fa-trash-alt"></i></button>
+            </div>
             </div>
 
         </div>

@@ -1,4 +1,4 @@
-import ProductTable from "../../component/HomePage/ProductTable";
+import ProductList from "../../component/HomePage/ProductList";
 import Sidebar from "../../component/HomePage/Sidebar";
 import AddProduct from "../AddProduct/AddProduct";
 import './HomePage.css';
@@ -19,15 +19,15 @@ const HomePage = props => {
     }, []);
 
     return <div className='row home-page py-3'>
-        {/* <div className='col-3'>
-            <div class="sticky-top">
+        <div className='col-2'>
+            <div class="sticky-top p-2">
                 <Sidebar />
             </div>
-        </div> */}
+        </div>
         
-        <div className='col col-md-8 mx-auto'>
+        <div className='col col-md-10 mx-auto'>
             
-            <ProductTable products = {products}/>
+            <ProductList products = {products}/>
         </div>
         
     </div>
