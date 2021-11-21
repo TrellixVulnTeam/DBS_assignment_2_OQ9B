@@ -45,7 +45,7 @@ drop table if exists Cart;
 CREATE TABLE Cart (
   `cartID` INT AUTO_INCREMENT,
   `cusID` INT NOT NULL,
-  PRIMARY KEY (`cartId`, `cusID`),
+  PRIMARY KEY (`cartID`, `cusID`),
    foreign key (`cusID`) references `Customer` (`id`) on delete cascade
 );
 
