@@ -2,14 +2,14 @@
 drop table if exists `shopUser`;
 CREATE TABLE `shopUser` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
-  `accounts` VARCHAR(100) NOT NULL,
+  `account` VARCHAR(100) UNIQUE NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `firstname` VARCHAR(50) NOT NULL,
   `lastname` VARCHAR(100) NOT NULL,
   `birthday` DATE NOT NULL,
   `phonenumber` VARCHAR(15) NOT NULL,
   `address` VARCHAR(300) NOT NULL,
-  `email` VARCHAR(100) NOT NULL
+  `email` VARCHAR(100) UNIQUE NOT NULL
 );
 
 drop table if exists message;
