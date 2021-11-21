@@ -19,8 +19,8 @@ CREATE TABLE `message` (
   `timesent` DATETIME NOT NULL,
   `idsent` INT NOT NULL,
   `idreceive` INT NOT NULL,
-  constraint foreign key ( `idsent`) references `shopUser` (`id`) on delete cascade,
-  constraint foreign key ( `idreceive`) references `shopUser` (`id`) on delete cascade
+  foreign key ( `idsent`) references `shopUser` (`id`) on delete cascade,
+  foreign key ( `idreceive`) references `shopUser` (`id`) on delete cascade
 );
 
 #loai khach hang
@@ -36,8 +36,8 @@ drop table if exists Customer;
 CREATE TABLE `Customer` (
   `id` INT PRIMARY KEY,
   `cusTypeID` INT,
-  constraint foreign key (`id`) references `shopUser` (`id`) on delete cascade,
-  constraint foreign key (`cusTypeID`) references `CustomerType` (`typeID`) on delete set null
+   foreign key (`id`) references `shopUser` (`id`) on delete cascade,
+   foreign key (`cusTypeID`) references `CustomerType` (`typeID`) on delete set null
 );
 
 #Gio hang
@@ -46,7 +46,7 @@ CREATE TABLE Cart (
   `cartID` INT AUTO_INCREMENT,
   `cusID` INT NOT NULL,
   PRIMARY KEY (`cartId`, `cusID`),
-  constraint foreign key (`cusID`) references `Customer` (`id`) on delete cascade
+   foreign key (`cusID`) references `Customer` (`id`) on delete cascade
 );
 
 drop table if exists shopOwner;
@@ -56,7 +56,7 @@ CREATE TABLE `shopOwner` (
   `startDate` date NOT NULL,
   `endDate` date,
   `status` VARCHAR(20),
-  constraint foreign key (shopOwnerID) references `shopUser` (id) on delete cascade
+   foreign key (shopOwnerID) references `shopUser` (id) on delete cascade
 );
 
 drop table if exists product;
@@ -70,13 +70,13 @@ CREATE TABLE `product` (
   `type` VARCHAR(40),
   `imageURL` VARCHAR(100),
   PRIMARY KEY (`id`, `ownerID`),
-  constraint foreign key (ownerID) references `shopOwner` (shopOwnerID) on delete cascade
+   foreign key (ownerID) references `shopOwner` (shopOwnerID) on delete cascade
 );
 
 drop table if exists `admin`;
 CREATE TABLE `admin` (
 	adminID INT PRIMARY KEY,
-	constraint foreign key (adminId) references shopUser (id) on delete cascade
+	 foreign key (adminId) references shopUser (id) on delete cascade
 );
 
 drop table if exists `transaction`;
@@ -85,7 +85,7 @@ CREATE TABLE `transaction` (
   `deliverAddr` varchar(255) NOT NULL,
   `discountCode` varchar(255),
   `customerId` int NOT NULL,
-   constraint foreign key (`customerId`) references `Customer` (`id`) on delete cascade
+    foreign key (`customerId`) references `Customer` (`id`) on delete cascade
 );
 
 drop table if exists `company`;
@@ -103,7 +103,7 @@ CREATE TABLE `order` (
   `status` varchar(255) NOT NULL,
   `paymentTime` timestamp,
   PRIMARY KEY (`transID`, `orderID`),
-  constraint foreign key (`transID`) references `transaction` (`transId`) on delete cascade
+   foreign key (`transID`) references `transaction` (`transId`) on delete cascade
 );
 
 #Lien he
@@ -113,7 +113,7 @@ CREATE TABLE `contact` (
   `phoneNum` varchar(11) NOT NULL,
   `dCompanyAddr` varchar(255) NOT NULL,
   PRIMARY KEY (`dCompanyId`, `phoneNum`),
-  constraint foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade
+   foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade
 );
 
 #Dot giam gia
@@ -125,8 +125,8 @@ CREATE TABLE `sale` (
   `endDate` datetime NOT NULL,
   `adminID` INT NULL,
   `shopOwnerID` INT NOT NULL,
-  constraint foreign key (`adminID`) references `admin` (`adminID`) on delete set null,
-  constraint foreign key (`shopOwnerID`) references `shopOwner` (`shopOwnerID`) on delete cascade
+   foreign key (`adminID`) references `admin` (`adminID`) on delete set null,
+   foreign key (`shopOwnerID`) references `shopOwner` (`shopOwnerID`) on delete cascade
 );
 
 # ma giam gia
@@ -137,7 +137,7 @@ CREATE TABLE `discountCode` (
   `value` float NOT NULL,
   `quantity` int NOT NULL,
   PRIMARY KEY (`cName`, `serial`, `saleCode`),
-  constraint foreign key (`saleCode`) references `sale` (`code`) on delete cascade
+   foreign key (`saleCode`) references `sale` (`code`) on delete cascade
 );
 
 drop table if exists deliver;
@@ -149,8 +149,8 @@ CREATE TABLE `deliver` (
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
   PRIMARY KEY (`dCompanyId`, `dTransactionId`, `dOrderId`),
-  constraint foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade,
-  constraint foreign key (`dTransactionId`, `dOrderId`) references `order` (transID, orderID) on delete cascade
+   foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade,
+   foreign key (`dTransactionId`, `dOrderId`) references `order` (transID, orderID) on delete cascade
 );
 
 # Gio hang chua san pham
@@ -162,8 +162,8 @@ CREATE TABLE `productInCart` (
   `productID` INT NOT NULL,
   `amount` INT NOT NULL,
   PRIMARY KEY (`cartID`, `customerID`, `ownerID`, `productID`),
-  constraint foreign key (`cartID`) references Cart (cartID) on delete cascade,
-  constraint foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade
+  foreign key (`cartID`) references Cart (cartID) on delete cascade,
+  foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade
 );
 
 #danh gia san pham
@@ -174,8 +174,8 @@ CREATE TABLE `review` (
   `customerID` INT NOT NULL,
   `content` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`ownerID`, `productID`, `customerID`),
-  constraint foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade,
-  constraint foreign key (`customerID`) references Customer (`id`)
+   foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade,
+   foreign key (`customerID`) references Customer (`id`)
 );
 
 drop table if exists payment;
@@ -186,9 +186,9 @@ CREATE TABLE `payment` (
   `ownerID` INT NOT NULL,
   `method` VARCHAR(40) NOT NULL,
   PRIMARY KEY (`transID`, `productID`, `customerID`, `ownerID`),
-  constraint foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade,
-  constraint foreign key (`customerID`) references Customer (`id`) on delete cascade,
-  constraint foreign key (transID) references transaction (transID)
+   foreign key (`ownerID`, `productID`) references product (`ownerID`, `id`) on delete cascade,
+   foreign key (`customerID`) references Customer (`id`) on delete cascade,
+   foreign key (transID) references transaction (transID)
 );
 
 # Loai khach hang nhan ma giam gia
@@ -199,8 +199,8 @@ CREATE TABLE `promotion` (
   `pSaleCode` varchar(9) NOT NULL,
   `pCustomerTypeCode` INT NOT NULL,
   PRIMARY KEY (`pName`, `pSerial`, `pSaleCode`, `pCustomerTypeCode`),
-  constraint foreign key (pCustomerTypeCode) references CustomerType (typeID) on delete cascade,
-  constraint foreign key (`pName`, `pSerial`, `pSaleCode`) references discountCode (`cName`, `serial`, `saleCode`) on delete cascade
+   foreign key (pCustomerTypeCode) references CustomerType (typeID) on delete cascade,
+   foreign key (`pName`, `pSerial`, `pSaleCode`) references discountCode (`cName`, `serial`, `saleCode`) on delete cascade
 );
 
 # Khach hang so huu ma giam gia
@@ -211,6 +211,6 @@ CREATE TABLE `own` (
   `oCusID` INT NOT NULL,
   `used` int NOT NULL,
   PRIMARY KEY (`oName`, `oSerial`, `oSaleCode`, `oCusID`),
-  constraint foreign key (`oName`, `oSerial`, `oSaleCode`) references discountCode (`cName`, `serial`, `saleCode`) on delete cascade,
-  constraint foreign key (oCusID) references Customer (id) on delete cascade
+   foreign key (`oName`, `oSerial`, `oSaleCode`) references discountCode (`cName`, `serial`, `saleCode`) on delete cascade,
+   foreign key (oCusID) references Customer (id) on delete cascade
 );
