@@ -1,7 +1,7 @@
 
 
 
-const Product = props => {
+const Product = ({product}) => {
 
 
     return (
@@ -9,7 +9,7 @@ const Product = props => {
         <div class="card">
 
             <div class="view overlay p-1">
-                <img class="card-img-top img-thumbnail rounded img-responsive" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
+                <img class="card-img-top img-thumbnail rounded img-responsive" src={product.imageURL}
                     alt="Card image cap" />
                 {/* <a href="#!">
                     <div class="mask rgba-white-slight"></div>

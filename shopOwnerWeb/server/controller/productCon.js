@@ -14,8 +14,8 @@ module.exports = (app) => {
     app.post('/add-product' , (req , res)=>{
         
         console.log(req.body);
-        const shopOwnerID = req.body.shopOwnerID;
         const data = {
+            shopOwnerID: req.body.shopOwnerID,
             amount: req.body.amount,
             name: req.body.name,
             description: req.body.description,
@@ -23,7 +23,7 @@ module.exports = (app) => {
             type: req.body.type,
             imageURL: req.body.imageURL
         }
-        
+        product.add(data, result => res.send(result));
     })
 
 
