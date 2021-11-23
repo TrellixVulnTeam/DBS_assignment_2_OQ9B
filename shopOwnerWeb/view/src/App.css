@@ -11,6 +11,11 @@
   height: 60vh;
 }
 
+.circle {
+  border-radius: 1rem !important;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

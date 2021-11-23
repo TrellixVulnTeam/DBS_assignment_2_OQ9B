@@ -7,7 +7,7 @@ module.exports = (app) => {
        product.get(result => {
             
             // console.log(result.data);
-            res.send(result.data);
+            res.send(result);
        })
     
     });
@@ -27,6 +27,16 @@ module.exports = (app) => {
         product.add(data, result => res.send(result));
     })
 
+    app.get('/product/:shopID/:id' , (req , res)=>{
+        
+        let shopID = req.params.shopID;
+        let id = req.params.id;
+        product.getByID(shopID, id, result => {
+
+
+        })
+    
+    })
 
 
 }

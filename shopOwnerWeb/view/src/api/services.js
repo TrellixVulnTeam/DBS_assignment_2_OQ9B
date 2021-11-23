@@ -19,7 +19,25 @@ const getProduct = () => {
     return new Promise((resolve, reject) => {
 
 
-        axios.get(url + 'product').then(result => resolve(result.data))
+        axios.get(url + 'product').then(result => 
+        {   
+            console.log(result.data.data);
+            resolve(result.data.data)
+        })
+        .catch(error => reject(error));
+    })
+}
+
+const getProductByID = (product) => {
+
+    return new Promise((resolve, reject) => {
+
+
+        axios.get(url + 'product' + product.ownerID + '/' + product.id).then(result => 
+        {   
+            console.log(result);
+            resolve(result.data.data)
+        })
         .catch(error => reject(error));
     })
 }
