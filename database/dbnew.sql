@@ -102,8 +102,12 @@ CREATE TABLE `order` (
   `totalPrice` double(10,2) NOT NULL,
   `status` varchar(255) NOT NULL,
   `paymentTime` timestamp,
+  `ownerID` INT NOT NULL,
+  `productID` INT NOT NULL,
   PRIMARY KEY (`transID`, `orderID`),
-   foreign key (`transID`) references `transaction` (`transId`) on delete cascade
+   foreign key (`transID`) references `transaction` (`transId`) on delete cascade,
+   foreign key (`ownerID`) references `product` (`ownerID`) on delete cascade,
+   foreign key (`productID`) references `product` (`id`) on delete cascade
 );
 
 #Lien he
