@@ -6,6 +6,11 @@
   background-color: #00c0b1;
 }
 
+.overflow-vertical {
+  overflow-y: scroll;
+  height: 60vh;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

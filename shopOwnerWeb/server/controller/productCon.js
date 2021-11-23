@@ -5,7 +5,8 @@ module.exports = (app) => {
     app.get('/product' , (req , res)=>{
     
        product.get(result => {
-
+            
+            // console.log(result.data);
             res.send(result.data);
        })
     
