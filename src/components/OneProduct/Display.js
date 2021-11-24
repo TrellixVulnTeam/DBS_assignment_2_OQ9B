@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import QuantityBox from './QuantityBox';
 import { Link } from "react-router-dom";
-import {Container, ProImg, InfoSection, NormalBtn, ColorBtn, BtnContainer} from './DisplayElement';
+import { Container, ProImg, InfoSection, NormalBtn, ColorBtn, BtnContainer } from './DisplayElement';
 import PopUp from './PopUp';
 import { AddToCart } from '../../pages/cart';
 import parseNumber from '../products/parseNumber';
+import priceWithDots from '../products/priceWithDots';
 function ProInfo(props) {
   //url to product  
 
   const handleAddToCart = () => {
-    for(let i = 0; i < quantity; i++)
-    {
-      AddToCart({id: id, img: img, name: title, price: parseNumber(price)})
+    for (let i = 0; i < quantity; i++) {
+      AddToCart({ id: id, img: imageURL, name: name, price: price })
     }
     setAddToCart(true);
   }
@@ -21,46 +21,41 @@ function ProInfo(props) {
   }
 
   const onDecrement = () => {
-   if (quantity <= 1) return;
-   setQuantiy(quantity - 1);
- }
+    if (quantity <= 1) return;
+    setQuantiy(quantity - 1);
+  }
 
- const onIncrement = () => {
-  setQuantiy(quantity + 1);
-}
+  const onIncrement = () => {
+    setQuantiy(quantity + 1);
+  }
 
-  const [addToCart, setAddToCart] = useState(false); 
+  const [addToCart, setAddToCart] = useState(false);
   const [quantity, setQuantiy] = useState(1);
-  const {id, img, title, price} = props.display;
+  const { id, imageURL, name, price } = props.display;
 
   return (
-    <React.Fragment> 
-    <Container>
-    <ProImg src = {img} alt='product img'/>
-    <InfoSection>
-    <h1 className='pro_name'>{title}</h1>
-    <p className='pro_price'>{price} VND</p>
-   
-    {/* <p className='color-section'>Màu sắc</p>
-    <ColorBtn style={{backgroundColor: '#333333'}} />
-    <ColorBtn style={{backgroundColor: 'yellow'}} />
-    <ColorBtn style={{backgroundColor: '#ffc107'}} /> */}
+    <React.Fragment>
+      <h1 className="text-capitalize mx-5" style={{ fontWeight: 1000, position: 'relative', left: 300, top: 20 }}>{name}</h1>
+      <Container>
+        <ProImg src={imageURL} alt='product img' />
+        <InfoSection>
+          <h1 className='pro_name'>Tên sản phẩm: {name}</h1>
+          <p className='pro_price'>Giá: {priceWithDots(price)} VND</p>
+          <p className='quantity-section'>Số lượng</p>
+          <QuantityBox qty={quantity} onDecrement={onDecrement} onIncrement={onIncrement} />
 
-    <p className='quantity-section'>Số lượng</p>
-    <QuantityBox qty={quantity} onDecrement={onDecrement} onIncrement={onIncrement}/>
+          <BtnContainer>
+            <NormalBtn >
+              <Link to='/payment' style={{ textDecoration: 'none', color: 'black' }}> Mua ngay </Link>
+            </NormalBtn>
+            <NormalBtn onClick={handleAddToCart}>Thêm vào giỏ hàng</NormalBtn>
+          </BtnContainer>
+          <PopUp trigger={addToCart} setTrigger={closePopUp}></PopUp>
 
-    <BtnContainer>
-    <NormalBtn > 
-    <Link to='/payment' style={{ textDecoration: 'none', color: 'black' }}> Mua ngay </Link>
-    </NormalBtn>
-    <NormalBtn onClick={handleAddToCart}>Thêm vào giỏ hàng</NormalBtn>
-    </BtnContainer>
-    <PopUp trigger={addToCart} setTrigger={closePopUp}></PopUp>
-
-    </InfoSection>
-    </Container>
+        </InfoSection>
+      </Container>
     </React.Fragment>
- 
+
   );
 }
 

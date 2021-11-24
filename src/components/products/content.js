@@ -2,36 +2,41 @@ import React, { Component } from "react";
 import parseNumber from "./parseNumber";
 import { priceTag } from "./../../data/ProductData/priceTags"
 import { productType } from "../../data/ProductData/productTypes";
-import { shops } from "../../data/shopData/shopData"
+import axios from 'axios';
 const Context = React.createContext();
 
 class Provider extends Component {
   state = {
     products: [],
-    category: "",
-    titleImg: "",
+    shopTitle: JSON.parse(localStorage.getItem('shopTitle')) || "",
     modalOpen: false,
     filterBrandModal: false,
     filterPriceModal: false,
-    productType: productType[0],
-    shops: shops
+    productsByShop: JSON.parse(localStorage.getItem('productsByShop')) || [],
+    shops: [],
+    productsFeatured: [],
   };
 
-  setProducts = (data) => {
-    let tempProducts = [];
-    data.forEach(item => {
-      const it = { ...item };
-      tempProducts = [...tempProducts, it];
-    });
-    this.setState({
-      products: tempProducts
-    })
+  componentDidMount() {
+    axios.get(`http://localhost:5000/products`)
+      .then((response) => {
+        const productsList = response.data;
+        this.setState(() => ({
+          products: productsList
+        }))
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 
-  setProductType = (data) => {
-    this.setState({
-      productType: data
-    })
+  setProducts = (shopId) => {
+    let tempProducts = this.state.products;
+    let tempProductsByShop = tempProducts.filter(product => product.ownerID === shopId);
+    this.setState(
+      { productsByShop: tempProductsByShop },
+      () => { localStorage.setItem('productsByShop', JSON.stringify(this.state.productsByShop)) }
+    )
   }
 
   openModal = (type) => {
@@ -115,11 +120,10 @@ class Provider extends Component {
     })
   }
 
-  setTitle = (title, img) => {
+  setTitle = (title) => {
     this.setState({
-      category: title,
-      titleImg: img
-    })
+      shopTitle: title
+    }, () => { localStorage.setItem('shopTitle', JSON.stringify(this.state.shopTitle)) })
   }
 
   render() {

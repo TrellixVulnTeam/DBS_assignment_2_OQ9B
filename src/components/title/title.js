@@ -12,9 +12,6 @@ export default function Title({ title, img }) {
                         </h1>
                     </div>
                 </div>
-                <div className="row title-img">
-                    <div className="col-12"><img src={img} alt="banner" /></div>
-                </div>
             </>
         )
     }

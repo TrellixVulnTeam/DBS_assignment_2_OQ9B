@@ -7,25 +7,25 @@ export const Container = styled.div`
     margin-top: 80px;
     display:flex;
     justify-content: center;
+    position: relative;
+    left: 100px;
 `
 
 export const ProImg = styled.img`
-    height:650px;
-    width: 700px;
+    height: 150px;
+    width: 200px;
     margin-left: -250px;
     margin-right: 40px;
-
 `
 
 export const BtnContainer = styled.div`
     width: 400px;
     display: grid;
     grid-template-columns: auto auto;
-    margin-top: 80px;
 `
 
 export const NormalBtn = styled.button`
-    width: 180px;
+    width: 120px;
     height: 60px;
     margin-right: 40px;
     border-radius: 10px;
@@ -40,7 +40,7 @@ export const NormalBtn = styled.button`
     &:hover {
         background-color: #ffc107;
         transform: translateY(-5px);
-      }
+    }
 
 `
 
@@ -60,7 +60,7 @@ export const InfoSection = styled.div`
     margin:10px;
 
     .pro_name{
-        font-size: 40px;
+        font-size: 30px;
         font-weight: bold;
     }
 
@@ -69,18 +69,13 @@ export const InfoSection = styled.div`
         font-size: 30px;
     }
 
-    .color-section {
-        font-size: 25px;
-        margin-top: 60px ;
-    }
-
     .quantity-section {
-        font-size: 25px;
+        font-size: 30px;
         margin-top: 30px ;
     }
 
     .container-normal_btn {
-        margin-top: 40px;
+        margin-top: 30px;
     }
 
 

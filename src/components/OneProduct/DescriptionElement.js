@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display: grid;
-    grid-template-columns: auto;
-    width: 900px;
-    height: 380px;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 200px;
     margin: auto;
     margin-top: 100px;
     padding-bottom: 20px;
     background-color: #E5E5E5 ;
-
+    position: relative;
+    top: -350px
 `
 export const Title = styled.div`
     background-color: #C4C4C4;

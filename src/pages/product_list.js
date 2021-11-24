@@ -32,7 +32,7 @@ const Page = ({ data }) => {
     <>
       <Consumer>
         {value => {
-          return value.products.slice(pagination.start, pagination.perPage).map(product => {
+          return value.productsByShop.slice(pagination.start, pagination.perPage).map(product => {
             return <Product key={product.id} product={product} />
           })
         }}
@@ -61,7 +61,7 @@ export default class ProductList extends Component {
       <React.Fragment>
         <div className="container">
           <Consumer>
-            {value => (<Title title={value.category} img={value.titleImg} />)}
+            {value => (<Title title={value.shopTitle} />)}
           </Consumer>
           <div className="row">
             <FilterBar />

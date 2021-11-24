@@ -7,10 +7,12 @@ export const ProductWrapper = styled.div`
     }
     .card-footer p {
         font-size: 18px;
+        font-weight: bold !important;
     }
     .card-footer h5 {
         color: red;
-        font-size: 17px; 
+        font-size: 17px;
+        font-weight: bold !important;
     }
     &:hover {
         .card {
@@ -79,7 +81,7 @@ export const ProductWrapper = styled.div`
   }
   .card-img-top {
     width: 100%;
-    height: 200px;
+    height: 150px;
   }
   .img-container {
     position: relative;
@@ -89,7 +91,7 @@ export const ProductWrapper = styled.div`
     text-decoration: none;
   }
   .card {
-    height: 400px;
+    height: 350px;
     width: 300px;
   }
   .card li {

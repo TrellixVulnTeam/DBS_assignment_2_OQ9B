@@ -1,45 +1,52 @@
 import React, { Component } from "react";
-import { homePianoList } from "../data/HomePage/piano_data";
-import { homeGuitarList } from "../data/HomePage/guitar_data";
-import { homeTrendingList } from "../data/HomePage/trending_data";
 import { Consumer } from "../components/products/content";
 import Shop from "../components/shop/shops";
 import ProductListSlide from "../components/homeComponents/productListSlide/productListSlide";
-import HomeAdvertisements from "../components/homeComponents/homeAdvertisements";
-
-const ad1 =
-  "https://carpentersmusic.com/wp-content/uploads/2021/06/Carpenters-Promo-June-2021.jpg";
-const ad2 =
-  "https://carpentersmusic.com/wp-content/uploads/2021/02/Carpenters-Peavey-Promo2-a.png";
-const ad3 =
-  "https://carpentersmusic.com/wp-content/uploads/2020/07/Showroom-with-Logo2.jpg";
-const ad4 =
-  "https://carpentersmusic.com/wp-content/uploads/2019/07/services.png?resize=1024%2C550&ssl=1";
+import axios from 'axios';
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shops: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:5000/shops`)
+      .then((response) => {
+        const shopsList = response.data;
+        this.setState(() => ({
+          shops: shopsList
+        }))
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   render() {
     return (
       <>
-        <div className="container">
-          <div className="row mx-0">
-            <h3 style={{ fontWeight: "bold" }}>Danh mục cửa hàng</h3>
-            <Consumer>
-              {value => {
-                return value.shops.map(shop => {
-                  return <Shop key={shop.id} shop={shop} />
-                })
-              }}
-            </Consumer>
+        <Consumer>
+          {value => <div>
+            <div className="container">
+              <div className="row mx-0">
+                <h3 style={{ fontWeight: "bold" }}>Danh mục cửa hàng</h3>
+                {this.state.shops.map(shop => {
+                  return <Shop key={shop.shopOwnerID} shop={shop} />
+                })}
+              </div>
+            </div>
+            <div className="container">
+              <ProductListSlide
+                title="Sản phẩm nổi bật"
+                dataList={value.products.slice(0, 6)}
+              />
+            </div>
           </div>
-        </div>
-        <div className="container">
-          <ProductListSlide
-            title="Sản phẩm nổi bật"
-            dataList={homeTrendingList}
-          />
-          <ProductListSlide title="Piano" dataList={homePianoList} />
-          <ProductListSlide title="Guitar" dataList={homeGuitarList} />
-        </div>
+          }
+        </Consumer>
       </>
     );
   }

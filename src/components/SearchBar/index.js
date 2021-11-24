@@ -8,7 +8,6 @@ import {
   NavLink,
   NavIcon,
   NavMenu,
-  NavLinkText,
   SearchNav,
   SearchBtn,
   SearchInput,
