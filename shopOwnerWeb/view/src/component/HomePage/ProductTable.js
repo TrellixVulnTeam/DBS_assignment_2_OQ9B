@@ -23,7 +23,7 @@ const ProductTable = ({products, changeEditModalItem}) => {
           
           {
               products.map((product, index) => {
-                  return <Tablerow product={product} number = {index} changeEditModalItem = {changeEditModalItem}/>
+                  return <Tablerow product={product} number = {index} changeEditModalItem = {changeEditModalItem} key={index}/>
               })
           }
         </tbody>

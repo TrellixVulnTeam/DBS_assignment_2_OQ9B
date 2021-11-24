@@ -2,7 +2,7 @@ const express = require('express');
 // var cors = require('cors');
 const app = express();
 const productCont = require('./controller/productCon');
-
+const authCount = require('./controller/authCont');
 // app.use(cors);
 
 app.use(express.urlencoded({extended: true}))
@@ -21,6 +21,7 @@ app.use(function(req, res, next) {
 
 // add route
 productCont(app);
+authCount(app);
 // billCont(app);
 
 // app.set('view engine', 'ejs');

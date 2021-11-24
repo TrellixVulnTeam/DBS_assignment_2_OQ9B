@@ -1,13 +1,14 @@
-import ProductList from "../../component/HomePage/ProductList";
 import Sidebar from "../../component/HomePage/Sidebar";
 import ProductTable from "../../component/HomePage/ProductTable";
 import EditModalItem from "../../component/HomePage/EditModalItem";
 import './HomePage.css';
 import { getProduct } from "../../api/services";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const HomePage = props => {
 
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [editModalItem, changeEditModalItem] = useState({
         ownerID: 1,
@@ -28,6 +29,7 @@ const HomePage = props => {
         .catch(error => setProducts([]));
     }, []);
 
+    
     return <div className='row home-page py-3'>
         <div className='col-2'>
             <div class="sticky-top">

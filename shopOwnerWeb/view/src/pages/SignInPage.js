@@ -1,48 +1,69 @@
-
+import { useRef } from "react";
+import { login } from "../api/services";
+import { getUser, setUser } from "../utils/func";
+import {Navigate, useNavigate} from "react-router";
+import { Link } from "react-router-dom";
 
 const SignInPage = props => {
 
-    return (
-        <section class="vh-100">
-  <div class="container-fluid h-custom">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" class="img-fluid"
-          alt="Sample image" />
-      </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form>
-          
-          <div class="form-outline mb-4">
-            <input type="email" id="form3Example3" class="form-control form-control-lg"
-              placeholder="Nhập tên tài khoản" />
-            
-          </div>
+    const accountRef = useRef();
+    const passwordRef = useRef();
+    const navigate = useNavigate();
 
-          
-          <div class="form-outline mb-3">
-            <input type="password" id="form3Example4" class="form-control form-control-lg"
-              placeholder="Nhập mật khẩu" />
-          </div>
+    const handleLogin = () =>
+    {
+      
+      login(accountRef.current.value, passwordRef.current.value)
+      .then(
+        result => {
+          if (result.data.isSuccess)
+            setUser(result.data.data);
+            navigate('/');
+        }
+      )
+    }
 
-          <div class="d-flex justify-content-between align-items-center">
-            <a href="#!" class="text-body">Quên mật khẩu?</a>
-          </div>
+    return !getUser() ? (
+        <section className="vh-100">
+          <div className="container-fluid h-custom">
+            <div className="row d-flex justify-content-center align-items-center h-100">
+              <div className="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/draw2.png" className="img-fluid"
+                  alt="Sample image" />
+              </div>
+              <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form>
+                  
+                  <div className="form-outline mb-4">
+                    <input type="text" name="account" className="form-control form-control-lg"
+                      placeholder="Nhập tên tài khoản" ref={accountRef}/>
+                    
+                  </div>
 
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-outline-primary btn-lg"
-              >Đăng nhập</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0">Bạn chưa có tài khoản? <a href="#!"
-                class="link-danger">Đăng ký đi nào</a></p>
-          </div>
+                  
+                  <div className="form-outline mb-3">
+                    <input type="password" name="password" className="form-control form-control-lg"
+                      placeholder="Nhập mật khẩu" ref={passwordRef}/>
+                  </div>
 
-        </form>
-      </div>
-    </div>
-  </div>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <a href="#!" className="text-body">Quên mật khẩu?</a>
+                  </div>
+
+                  <div className="text-center text-lg-start mt-4 pt-2">
+                    <button type="button" className="btn btn-outline-primary btn-lg"
+                      onClick={handleLogin}
+                      >Đăng nhập</button>
+                    <p className="small fw-bold mt-2 pt-1 mb-0">Bạn chưa có tài khoản? <Link to='/signup'>Đăng ký đi nào</Link></p>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
   
-</section>
-    )
+        </section>
+    ): <Navigate to='/' />
 }
 
 

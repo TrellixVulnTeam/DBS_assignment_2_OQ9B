@@ -1,30 +1,38 @@
 import './App.css';
-import Footer from './component/Footer/Footer';
 import Header from './component/Header/Header';
-import SignInPage from './pages/SignInPage';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
+import ProtectedComponent from './component/Route/ProtectedRoute';
+import SignInPage from './pages/SignInPage';
 
 import routes from './routes';
+import { useState } from 'react';
 
 function App() {
+
+  
   return (
     <div className="App">
     <BrowserRouter>
       <Header />
           <div className='p-5'>
-          <Routes>
-           {
-             routes.map((route, index) => {
-               return <Route path={route.path} element={route.component}/>
-             })
-           }
-          </Routes>
+
+              <Routes>
+                <Route path='/signin' element={<SignInPage />}/>
+          
+              { 
+                // protected route
+                routes.map((route, index) => 
+                  <Route path={route.path} element = {<ProtectedComponent element={route.component}/>} key={index}/>
+                )
+              }
+              </Routes>
+      
           </div>
-      {/* <Footer /> */}
+     
       </BrowserRouter>
     </div>
   );

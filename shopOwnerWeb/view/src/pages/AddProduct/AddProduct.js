@@ -1,5 +1,6 @@
 import {useRef} from 'react';
 import { addProduct } from '../../api/services';
+import { getUserID, getUser} from '../../utils/func';
 
 const AddProduct = props => {
 
@@ -14,7 +15,7 @@ const AddProduct = props => {
     const handleOnSubmit = async () => {
 
       const data = {
-        ownerID: ownerIDRef.current.value,
+        ownerID: getUserID(),
         amount: amountRef.current.value,
         name: nameRef.current.value,
         description: descriptionRef.current.value,
@@ -22,10 +23,9 @@ const AddProduct = props => {
         type: typeRef.current.value,
         imageURL: imageURLRef.current.value
       }
-
+      console.log(getUser());
       await addProduct(data)
       .then(result => {
-        ownerIDRef.current.value = '';
         amountRef.current.value = '';
         nameRef.current.value = '';
         descriptionRef.current.value = '';
@@ -42,26 +42,26 @@ const AddProduct = props => {
           <h2 className='text-info text-uppercase'>Thêm mới sản phẩm</h2>
         </div>
         <form className='mt-5'>
-          <div class="form-group d-flex flex-row">
+          {/* <div class="form-group d-flex flex-row">
             <input type="number" class="form-control p-3 text-center" placeholder="Nhập ID của chủ cửa hàng" ref={ownerIDRef}/>
+          </div> */}
+          <div class="form-group d-flex flex-row">
+            <input type="text" class="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' ref={nameRef} required/>
           </div>
           <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' ref={nameRef}/>
+            <input type="text" class="form-control p-3 text-center" placeholder="Nhập đường dẫn hình ảnh" name='imageURL' ref={imageURLRef} required/>
           </div>
           <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập đường dẫn hình ảnh" name='imageURL' ref={imageURLRef}/>
+            <input type="number" class="form-control p-3 text-center" placeholder="Nhập giá" name='price' ref={priceRef} required/>
           </div>
           <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập giá" name='price' ref={priceRef}/>
+            <input type="number" class="form-control p-3 text-center" placeholder="Nhập số lượng" name='amount' ref={amountRef} required/>
           </div>
           <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập số lượng" name='amount' ref={amountRef}/>
+            <input type="text" class="form-control p-3 text-center" placeholder="Nhập loại sản phẩm" name='type' ref={typeRef} required/>
           </div>
           <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập loại sản phẩm" name='type' ref={typeRef}/>
-          </div>
-          <div class="form-group d-flex flex-row">
-            <textarea class="form-control" name='description' rows="3" ref={descriptionRef}></textarea>
+            <textarea class="form-control" name='description' rows="3" ref={descriptionRef} required={true}></textarea>
           </div>
           <button type="button" class="btn btn-outline-info w-100 p-3 text-uppercase" onClick={handleOnSubmit}>Thêm</button>
         </form>

@@ -42,5 +42,14 @@ const getProductByID = (product) => {
     })
 }
 
+const login = (account, password) => {
+    return new Promise((resolve, reject) => {
 
-export {addProduct, getProduct};
+        axios.post(url + 'auth', {account, password})
+        .then(resolve)
+        .catch(reject);
+    })
+}
+
+
+export {addProduct, getProduct, login};

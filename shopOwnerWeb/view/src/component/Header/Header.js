@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
+import { getUser, logout } from "../../utils/func";
+import {useNavigate} from "react-router";
 
 const Header = props => {
 
+    const navigate = useNavigate();
 
+    const handleLogout = (event) => {
+
+        logout();
+        console.log(getUser());
+        navigate('/signin');
+        event.preventDefault();
+    }
 
     return (
         <nav className='navbar navbar-expand-lg navbar-dark bg-main p-2'>
@@ -25,6 +35,8 @@ const Header = props => {
                         <Link className="nav-link" to='/stats'>Thống kê</Link>
                     </li>
                 </ul>
+                {
+                !getUser() ?  
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item active">
                         <Link className="nav-link" to='/signin'>Đăng nhập</Link>
@@ -32,7 +44,18 @@ const Header = props => {
                     <li className="nav-item active">
                         <Link className="nav-link" to='/signup'>Đăng ký</Link>
                     </li>
-                </ul>
+                    
+                </ul>:
+                    <ul className="navbar-nav ml-auto">
+                            
+                            <li className="nav-item active">
+                                <Link className="nav-link" to='/signin'>Thông tin tài khoản</Link>
+                            </li>
+                            <li className="nav-item active">
+                                <button className='btn' onClick={handleLogout}>Đăng xuất</button>
+                            </li>
+                    </ul>
+                }
             </div>
 
         </nav>
