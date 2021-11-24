@@ -10,6 +10,7 @@ const HomePage = props => {
 
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const [isChanged, setChange] = useState(false);
     const [editModalItem, changeEditModalItem] = useState({
         ownerID: 1,
         amount: 1,
@@ -27,8 +28,11 @@ const HomePage = props => {
             console.log(result);
             setProducts(result)})
         .catch(error => setProducts([]));
-    }, []);
+    }, [isChanged]);
 
+    const toggleChange = () => {
+        setChange(!isChanged);
+    }
     
     return <div className='row home-page py-3'>
         <div className='col-2'>
@@ -43,7 +47,7 @@ const HomePage = props => {
             <ProductTable products={products} changeEditModalItem = {changeEditModalItem}/>
         </div>
         {
-            editModalItem ? <EditModalItem item={editModalItem}/> : null
+            editModalItem ? <EditModalItem item={editModalItem} action={toggleChange}/> : null
         }
     </div>
 };

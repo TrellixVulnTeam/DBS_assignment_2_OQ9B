@@ -2,10 +2,11 @@ const query = require('../common/query');
 
 module.exports = {
 
-    get: (callback) => {
+    get: (shopID, callback) => {
 
-        const sql = 'SELECT * from product';
-
+        console.log(shopID);
+        const sql = `SELECT * from product where ownerID = ${shopID}`;
+        console.log(sql);
         query.awaitQuery(sql)
         .then(
             result => callback({isSuccess:true, data: result})
@@ -31,9 +32,29 @@ module.exports = {
         const sql = `INSERT INTO product (ownerID, amount, name, description, price, type, imageURL)  
         VALUES ("${data.ownerID}", "${data.amount}", "${data.name}", 
         "${data.description}", "${data.price}", "${data.type}", "${data.imageURL}")`;
-        console.log(sql);
+        
         query.awaitQuery(sql).then(result => callback(true))
         .catch(error => callback(false));
+    },
+    update: (data, callback) => {
+        const sql = `UPDATE product set amount=${data.amount}, name="${data.name}", 
+         description="${data.description}", price=${data.price}, type="${data.type}"
+        , imageURL="${data.imageURL}"
+         where ownerID=${data.ownerID} and id=${data.id}
+         `;
+        
+        query.awaitQuery(sql).then(result => {
+            if (result.affectedRows > 0) {
+
+                console.log(sql);
+                callback({isSuccess: true, message: "Thành công"})
+            }
+            else {
+                callback({isSuccess: false, message: "Thất bại"})
+            }
+        })
+        .catch(error => callback({isSuccess: true, message: "Thất bại"}))
+        ;
     }
 
 };

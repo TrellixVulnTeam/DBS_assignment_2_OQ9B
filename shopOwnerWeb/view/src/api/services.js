@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getUserID} from "../utils/func";
 const url = 'http://localhost:3000/';
 
 const addProduct = (data) => {
@@ -11,7 +12,7 @@ const addProduct = (data) => {
 
 
     });
-
+    
 }
 
 const getProduct = () => {
@@ -19,7 +20,7 @@ const getProduct = () => {
     return new Promise((resolve, reject) => {
 
 
-        axios.get(url + 'product').then(result => 
+        axios.get(url + 'product/' + getUserID()).then(result => 
         {   
             console.log(result.data.data);
             resolve(result.data.data)
@@ -51,5 +52,16 @@ const login = (account, password) => {
     })
 }
 
+const updateProduct = (data) => {
 
-export {addProduct, getProduct, login};
+    return new Promise((resolve, reject) => {
+
+        axios.post(url + 'update-product', data).
+        then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+    
+}
+
+
+export {addProduct, getProduct, login, updateProduct};

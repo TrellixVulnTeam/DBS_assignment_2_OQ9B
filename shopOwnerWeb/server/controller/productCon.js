@@ -2,11 +2,13 @@ const product = require('../model/Product');
 
 module.exports = (app) => {
 
-    app.get('/product' , (req , res)=>{
-    
-       product.get(result => {
+    app.get('/product/:ownerID' , (req , res)=>{
+        
+        
+       product.get(req.params.ownerID, result => {
             
             // console.log(result.data);
+            
             res.send(result);
        })
     
@@ -35,6 +37,20 @@ module.exports = (app) => {
 
 
         })
+    
+    }),
+    app.post('/update-product' , (req , res)=>{
+        
+        const data = {
+            ownerID: req.body.ownerID,
+            amount: req.body.amount,
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            type: req.body.type,
+            imageURL: req.body.imageURL
+        }
+        product.update(req.body, result => res.send(result));
     
     })
 
