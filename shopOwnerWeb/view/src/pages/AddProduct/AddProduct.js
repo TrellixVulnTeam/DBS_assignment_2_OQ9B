@@ -5,7 +5,6 @@ import { getUserID, getUser} from '../../utils/func';
 const AddProduct = props => {
 
     const nameRef = useRef();
-    const ownerIDRef = useRef();
     const imageURLRef = useRef();
     const priceRef = useRef();
     const amountRef = useRef();
@@ -23,7 +22,7 @@ const AddProduct = props => {
         type: typeRef.current.value,
         imageURL: imageURLRef.current.value
       }
-      console.log(getUser());
+      
       await addProduct(data)
       .then(result => {
         amountRef.current.value = '';
@@ -39,12 +38,10 @@ const AddProduct = props => {
     return (
       <div className='w-50 mx-auto p-5'>
         <div className='form-header'>
-          <h2 className='text-info text-uppercase'>Thêm mới sản phẩm</h2>
+          <h2 className='text-info text-uppercase font-weight-bold'>Thêm mới sản phẩm</h2>
         </div>
         <form className='mt-5'>
-          {/* <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập ID của chủ cửa hàng" ref={ownerIDRef}/>
-          </div> */}
+          
           <div class="form-group d-flex flex-row">
             <input type="text" class="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' ref={nameRef} required/>
           </div>

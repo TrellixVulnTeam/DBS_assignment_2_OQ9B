@@ -13,7 +13,7 @@ const Tablerow = ({product, number, changeEditModalItem}) => {
     }
 
     const navigateToStats = (id) => {
-        navigate(`/stats/?id=${id}`);
+        navigate(`/stats/${id}`);
     }
 
     return (

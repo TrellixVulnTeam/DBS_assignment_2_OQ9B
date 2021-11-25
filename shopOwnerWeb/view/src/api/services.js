@@ -29,15 +29,17 @@ const getProduct = () => {
     })
 }
 
-const getProductByID = (product) => {
+const getProductByID = (id) => {
 
     return new Promise((resolve, reject) => {
 
 
-        axios.get(url + 'product' + product.ownerID + '/' + product.id).then(result => 
+        axios.get(url + 'product-by-id/' + getUserID() + '/' + id).then(result => 
         {   
-            console.log(result);
-            resolve(result.data.data)
+            console.log(result.data);
+            if (result.data.data.length > 0)
+                resolve(result.data.data[0]);
+            reject(null);
         })
         .catch(error => reject(error));
     })
@@ -75,4 +77,4 @@ const deleteProduct = (id) => {
 }
 
 
-export {addProduct, getProduct, login, updateProduct, deleteProduct};
+export {addProduct, getProduct, login, updateProduct, deleteProduct, getProductByID};

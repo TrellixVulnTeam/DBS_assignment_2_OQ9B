@@ -29,13 +29,13 @@ module.exports = (app) => {
         product.add(data, result => res.send(result));
     })
 
-    app.get('/product/:shopID/:id' , (req , res)=>{
+    app.get('/product-by-id/:shopID/:id' , (req , res)=>{
         
         let shopID = req.params.shopID;
         let id = req.params.id;
         product.getByID(shopID, id, result => {
 
-
+            res.send(result);
         })
     
     }),
