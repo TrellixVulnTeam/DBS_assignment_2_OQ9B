@@ -15,7 +15,7 @@ export default [
     },
     {
         component: <StatsPage />,
-        path: '/stats'
+        path: '/stats/:id'
     }
 
 ];

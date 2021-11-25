@@ -35,16 +35,16 @@ const HomePage = props => {
     }
     
     return <div className='row home-page py-3'>
-        <div className='col-2'>
+        <div className='col-12 col-lg-2 pb-2'>
             <div class="sticky-top">
                 <Sidebar />
             </div>
         </div>
         
-        <div className='col col-md-10 mx-auto'>
+        <div className='col col-lg-10 mx-auto'>
             
             {/* <ProductList products = {products}/> */}
-            <ProductTable products={products} changeEditModalItem = {changeEditModalItem}/>
+            <ProductTable products={products} changeEditModalItem = {changeEditModalItem} action={toggleChange}/>
         </div>
         {
             editModalItem ? <EditModalItem item={editModalItem} action={toggleChange}/> : null

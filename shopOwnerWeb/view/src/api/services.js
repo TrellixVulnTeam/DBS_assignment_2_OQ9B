@@ -20,7 +20,7 @@ const getProduct = () => {
     return new Promise((resolve, reject) => {
 
 
-        axios.get(url + 'product/' + getUserID()).then(result => 
+        axios.get(url + 'product-by-shop/' + getUserID()).then(result => 
         {   
             console.log(result.data.data);
             resolve(result.data.data)
@@ -63,5 +63,16 @@ const updateProduct = (data) => {
     
 }
 
+const deleteProduct = (id) => {
 
-export {addProduct, getProduct, login, updateProduct};
+    return new Promise((resolve, reject) => {
+
+
+        axios.get(url + 'delete-product/' + getUserID() + '/' + id)
+        .then(result => console.log(result))
+        .catch(error => console.log(error));
+    })
+}
+
+
+export {addProduct, getProduct, login, updateProduct, deleteProduct};

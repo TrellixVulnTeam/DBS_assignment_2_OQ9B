@@ -31,9 +31,7 @@ const Header = props => {
                     <li className="nav-item active">
                         <Link className="nav-link" to='/add-product'>Thêm mới</Link>
                     </li>
-                    <li className="nav-item active">
-                        <Link className="nav-link" to='/stats'>Thống kê</Link>
-                    </li>
+                    
                 </ul>
                 {
                 !getUser() ?  

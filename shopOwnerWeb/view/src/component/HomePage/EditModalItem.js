@@ -13,11 +13,13 @@ const EditModalItem = ({item, action}) => {
       price: item.price,
       type: item.type,
       imageURL: item.imageURL
-  })
+  });
+
+  const [submitStatus, setStatus] = useState("");
 
   useEffect(() => {
 
-    console.log(item.id);
+    setStatus("");
     setData({
       ownerID: getUserID(),
       id: item.id,
@@ -39,7 +41,13 @@ const EditModalItem = ({item, action}) => {
 
   const handleOnSubmit =(event) => {
     
-    updateProduct(data).then(result => action());
+    updateProduct(data)
+    .then(result => 
+    {
+      action();
+      console.log(result);
+      setStatus(result.data.message);
+    });
     event.preventDefault();
   }
     
@@ -75,8 +83,10 @@ const EditModalItem = ({item, action}) => {
           <div className="form-group d-flex flex-row">
             <textarea className="form-control" name='description' rows="3" value={data.description} onChange={handleOnChange}></textarea>
           </div>
+          <span className='text-danger' style={{fontSize:"1.5rem"}}>{submitStatus}</span>
         </div>
         <div className="modal-footer">
+         
             <button type='button' className='btn bg-main text-white w-25' onClick={handleOnSubmit}>Lưu</button>
           <button type="button" className="btn btn-danger" data-dismiss="modal">Thoát</button>
         </div>

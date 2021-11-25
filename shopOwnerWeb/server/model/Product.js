@@ -55,6 +55,24 @@ module.exports = {
         })
         .catch(error => callback({isSuccess: true, message: "Thất bại"}))
         ;
+    },
+    deleteProduct: (data, callback) => {
+
+        const sql = `DELETE FROM PRODUCT WHERE id=${data.id} and ownerID=${data.ownerID}`;
+
+        query.awaitQuery(sql).then(result => {
+            if (result.affectedRows > 0) {
+
+                console.log(sql);
+                callback({isSuccess: true, message: "Thành công"})
+            }
+            else {
+                callback({isSuccess: false, message: "Thất bại"})
+            }
+        })
+        .catch(error => callback({isSuccess: true, message: "Thất bại"}))
+        ;
+        
     }
 
 };

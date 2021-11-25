@@ -1,7 +1,7 @@
 
 import Tablerow from "./Tablerow";
 
-const ProductTable = ({products, changeEditModalItem}) => {
+const ProductTable = ({products, changeEditModalItem, action}) => {
 
 
 
@@ -23,7 +23,9 @@ const ProductTable = ({products, changeEditModalItem}) => {
           
           {
               products.map((product, index) => {
-                  return <Tablerow product={product} number = {index} changeEditModalItem = {changeEditModalItem} key={index}/>
+                  return <Tablerow product={product} number = {index} 
+                  action = {action}
+                  changeEditModalItem = {changeEditModalItem} key={index}/>
               })
           }
         </tbody>

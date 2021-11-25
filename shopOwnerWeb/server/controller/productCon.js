@@ -2,7 +2,7 @@ const product = require('../model/Product');
 
 module.exports = (app) => {
 
-    app.get('/product/:ownerID' , (req , res)=>{
+    app.get('/product-by-shop/:ownerID' , (req , res)=>{
         
         
        product.get(req.params.ownerID, result => {
@@ -54,5 +54,21 @@ module.exports = (app) => {
     
     })
 
+    app.get('/delete-product/:ownerID/:id' , (req , res)=>{
+        
+        const data = {
+            id: req.params.id,
+            ownerID: req.params.ownerID
+        };
+
+        console.log(data);
+
+        product.deleteProduct(data, result => {
+
+            console.log("!11");
+            res.send(result);
+        });
+     
+     });
 
 }

@@ -8,13 +8,21 @@ const Sidebar = props => {
     return <section id="sidebar">
     <div className="input-group">
         <div className="form-outline">
-            <input type="search" id="form1" className="form-control rounded-0" />
+            <input type="search" id="form1" className="form-control rounded-0" placeholder='Tìm kiếm sản phẩm'/>
         </div>
         <button type="button" className="btn btn-primary rounded-0">
             <i className="fas fa-search"></i>
         </button>
     </div>
-    <div>
+    
+</section>
+}
+
+export default Sidebar;
+
+
+/* 
+<div>
         <h6 className="p-1 border-bottom">Loại</h6>
         <ul>
             <li><a href="#">Living</a></li>
@@ -41,7 +49,4 @@ const Sidebar = props => {
             <div className="form-inline border rounded p-md-2 p-sm-1"> <input type="radio" name="type" id="notugly" /> <label for="notugly" className="pl-1 pt-sm-0 pt-1">Not Ugly</label> </div>
         </form>
     </div>
-</section>
-}
-
-export default Sidebar;
+*/

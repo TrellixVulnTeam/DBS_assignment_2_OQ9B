@@ -1,8 +1,20 @@
-
+import { useNavigate } from "react-router";
+import { deleteProduct } from "../../api/services";
 
 
 const Tablerow = ({product, number, changeEditModalItem}) => {
 
+    const navigate = useNavigate();
+
+    const handleOnDelete = (event) => {
+      
+      deleteProduct(product.id);
+      event.preventDefault();
+    }
+
+    const navigateToStats = (id) => {
+        navigate(`/stats/?id=${id}`);
+    }
 
     return (
         <tr>
@@ -15,8 +27,12 @@ const Tablerow = ({product, number, changeEditModalItem}) => {
           data-toggle="modal" data-target="#editModalItem"
          onClick={() => changeEditModalItem(product)}>
         <i class="fas fa-edit"></i></button></td>
-        <td><button className='btn btn-info'><i class="fas fa-info-circle"></i></button></td>
-        <td><button className='btn btn-danger'><i class="fas fa-trash-alt"></i></button></td>
+        <td>
+          <button className='btn btn-info' onClick={() => navigateToStats(product.id)}>
+            <i class="fas fa-info-circle"></i>
+          </button>
+        </td>
+        <td><button className='btn btn-danger' onClick={handleOnDelete}><i class="fas fa-trash-alt"></i></button></td>
     </tr>
     )
 }
