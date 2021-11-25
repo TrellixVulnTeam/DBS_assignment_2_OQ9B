@@ -152,8 +152,8 @@ CREATE TABLE `deliver` (
   `dTransactionId` int NOT NULL,
   `dOrderId` int NOT NULL,
   `dOrderStatus` varchar(255) NOT NULL,
-  `startDate` date NOT NULL,
-  `endDate` date,
+  `startDate` TIMESTAMP NOT NULL,
+  `endDate` TIMESTAMP,
   PRIMARY KEY (`dCompanyId`, `dTransactionId`, `dOrderId`),
    foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade,
    foreign key (`dTransactionId`, `dOrderId`) references `order` (transID, orderID) on delete cascade
