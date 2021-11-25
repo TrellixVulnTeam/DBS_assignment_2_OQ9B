@@ -6,7 +6,7 @@ const db_user = "b4775c762aff31";
 const db_password = "19f9ba66";
 
 // const host_name = "localhost";
-// const db_name = "db_bkis";
+// const db_name = "dbs_assignment";
 // const db_user = "root";
 // const db_password = "123456";
 

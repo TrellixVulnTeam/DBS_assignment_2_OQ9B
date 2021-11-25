@@ -13,7 +13,10 @@ import ProductInfo from "./pages/one_product";
 import SortModal from "./components/title/sortModal";
 import FilterByBrandModal from "./components/title/filterByBrandModal";
 import FilterByPriceModal from "./components/title/filterByPriceModal";
+import UserInfo from "./pages/userInfor";
+
 function App() {
+
   return (
     <div>
       <Provider>
@@ -27,6 +30,7 @@ function App() {
           <Route path="/products/one-product/id_product/:id" exact component={ProductInfo} />
           <Route path="/payment" exact component={Payment} />
           <Route path="/login" exact component={Login} />
+          <Route path="/user_info" exact component={UserInfo} />
         </Switch>
         <SortModal />
         <FilterByBrandModal />

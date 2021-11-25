@@ -1,19 +1,41 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import axios from "axios";
 import "./login.css";
 
-export default function LoginForm() {
-    const [email, setEmail] = useState("");
+function loginUser(user) {
+    console.log(user);
+    return axios.post('http://localhost:5000/login', user)
+        .then(data => {
+            if (data.data !== 'Incorrect Username and/or Password!') {
+                console.log(data);
+                return data.data;
+            } else {
+                console.log("Login Failed");
+                alert("Vui lòng nhập đúng tài khoản và mật khẩu");
+            }
+        }).catch(error => { console.log(error); });
+}
+
+export default function LoginForm({ setToken }) {
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     function validateForm() {
-        return email.length > 0 && password.length > 0;
+        return username.length > 0 && password.length > 0;
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
+    const handleSubmit = async e => {
+        e.preventDefault();
+        const user = {
+            username: username,
+            password: password
+        }
+        const token = await loginUser(user);
+        console.log(token);
+        setToken(token);
     }
 
     return (
@@ -25,15 +47,15 @@ export default function LoginForm() {
                 <div className="col-12 col-md-12 col-lg-6">
                     <div className="Login">
                         <h1 className="text-center" style={{ fontWeight: 700 }}>Đăng nhập</h1>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group size="lg" controlId="email" className="my-1">
-                                <Form.Label style={{ fontWeight: 600 }}>Email</Form.Label>
+                        <Form onSubmit={handleSubmit} action="#">
+                            <Form.Group size="lg" controlId="text" className="my-1">
+                                <Form.Label style={{ fontWeight: 600 }}>Username</Form.Label>
                                 <Form.Control
                                     autoFocus
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Vui lòng nhập email"
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    placeholder="Vui lòng nhập tài khoản"
                                     style={{ borderRadius: 20, }}
                                 />
                             </Form.Group>
@@ -47,11 +69,9 @@ export default function LoginForm() {
                                     style={{ borderRadius: 20, }}
                                 />
                             </Form.Group>
-                            <Link to="/">
-                                <Button block size="lg" type="submit" disabled={!validateForm()} id="btn">
-                                    Đăng nhập
-                                </Button>
-                            </Link>
+                            <Button block size="lg" type="submit" disabled={!validateForm()} id="btn">
+                                Đăng nhập
+                            </Button>
                         </Form>
                     </div>
                 </div>

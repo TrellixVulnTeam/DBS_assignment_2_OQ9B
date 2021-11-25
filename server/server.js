@@ -7,6 +7,7 @@ const app = express();
 const paymentRoute = require("./routes/payment/paymentAPI");
 const productsRoute = require("./routes/products/productsAPI");
 const shopsRoute = require("./routes/shops/shopsAPI");
+const loginRoute = require("./routes/login/loginAPI");
 
 const DEFAULT_PORT = process.env.port || 5000;
 app.use(cors());
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/payment", paymentRoute);
 app.use("/products", productsRoute);
 app.use("/shops", shopsRoute);
+app.use("/login", loginRoute);
 
 app.listen(DEFAULT_PORT, () => {
   console.log("Server is running on port: " + DEFAULT_PORT);

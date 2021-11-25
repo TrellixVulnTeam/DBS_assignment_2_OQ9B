@@ -1,23 +1,36 @@
-import React from "react"
-import Title from "../components/title/title"
+import React from "react";
 import LoginForm from "../components/login/login-form"
-import "../components/login/login.css"
+import "../components/login/login.css";
+import { Redirect } from "react-router";
+import useToken from "../components/login/useToken";
+
 const Login = () => {
-    return (
-        <div className="login-all">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12 col-md-12 col-lg-12" id="NB2">
-                    </div>
-                    <div className="row menu-row">
-                        <div className="col-12 col-md-12 col-lg-12 login-container">
-                            <LoginForm className="login-form" />
+    const { token, setToken } = useToken();
+
+    const userToken = localStorage.getItem('token');
+    if (!userToken) {
+        console.log(userToken);
+        return (
+            <div className="login-all">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-12 col-md-12 col-lg-12" id="NB2">
+                        </div>
+                        <div className="row menu-row">
+                            <div className="col-12 col-md-12 col-lg-12 login-container">
+                                <LoginForm className="login-form" setToken={setToken} />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    else {
+        return (
+            window.location.href = "/"
+        )
+    }
 }
 
 export default Login;

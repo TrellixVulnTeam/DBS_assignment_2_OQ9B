@@ -6,7 +6,8 @@ export const ReviewContainer = styled.div`
     width: 1000px;
     margin: auto;
     margin-top: 70px;
-
+    position: relative;
+    top: -350px;
     .rating{
         background-color: #EEEEEE;
         padding-left: 40px;
