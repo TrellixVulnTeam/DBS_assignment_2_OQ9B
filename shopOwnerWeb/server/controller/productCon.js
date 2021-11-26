@@ -16,7 +16,7 @@ module.exports = (app) => {
 
     app.post('/add-product' , (req , res)=>{
         
-        console.log(req.body);
+        
         const data = {
             ownerID: req.body.ownerID,
             amount: req.body.amount,
@@ -65,7 +65,7 @@ module.exports = (app) => {
 
         product.deleteProduct(data, result => {
 
-            console.log("!11");
+            
             res.send(result);
         });
      

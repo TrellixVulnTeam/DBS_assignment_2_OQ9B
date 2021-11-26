@@ -4,9 +4,9 @@ module.exports = {
 
     get: (shopID, callback) => {
 
-        console.log(shopID);
+        
         const sql = `SELECT * from product where ownerID = ${shopID}`;
-        console.log(sql);
+        
         query.awaitQuery(sql)
         .then(
             result => callback({isSuccess:true, data: result})
