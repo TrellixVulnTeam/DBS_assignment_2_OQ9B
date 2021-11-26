@@ -104,7 +104,7 @@ CREATE TABLE `order` (
   `paymentTime` timestamp,
   `ownerID` INT,
   `productID` INT,
-  `companyID` INT,
+  `companyID` INT NOT NULL,
   PRIMARY KEY (`transID`, `orderID`),
    foreign key (`transID`) references `transaction` (`transId`) on delete cascade,
     FOREIGN KEY (productID, ownerID)
