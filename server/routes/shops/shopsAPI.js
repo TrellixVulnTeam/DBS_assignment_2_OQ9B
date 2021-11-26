@@ -8,7 +8,7 @@ router.use((req, res, next) => {
 
 router.get("/", async (req, res) => {
     try {
-        connection.db.query(
+        connection.connection.query(
             `SELECT * FROM ${connection.db_name}.shopowner;`,
             (err, results, fields) => {
                 // results contains rows returned by server

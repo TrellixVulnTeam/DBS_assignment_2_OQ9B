@@ -1,7 +1,6 @@
 import React from "react";
 import LoginForm from "../components/login/login-form"
 import "../components/login/login.css";
-import { Redirect } from "react-router";
 import useToken from "../components/login/useToken";
 
 const Login = () => {

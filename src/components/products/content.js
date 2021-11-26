@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import parseNumber from "./parseNumber";
 import { priceTag } from "./../../data/ProductData/priceTags"
-import { productType } from "../../data/ProductData/productTypes";
 import axios from 'axios';
 const Context = React.createContext();
 

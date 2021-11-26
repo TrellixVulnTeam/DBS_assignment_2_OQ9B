@@ -4,7 +4,6 @@ import { ProductWrapper } from "../../container/ProductWrapper";
 import { StarRating } from "../starRating/StarRating";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AddToCart } from "../../pages/cart";
-import parseNumber from "./parseNumber.js";
 import priceWithDots from "./priceWithDots";
 export default class Product extends Component {
   render() {
@@ -16,7 +15,7 @@ export default class Product extends Component {
             <Link to={"/products/one-product/id_product/" + id}>
               <img src={imageURL} alt="products" className="card-img-top" id={id} />
             </Link>
-            <button className="cart-btn btn btn-sm" onClick={() => AddToCart({ id: id, img: imageURL, name: name, price: parseNumber(price) })}>
+            <button className="cart-btn btn btn-sm" onClick={() => AddToCart({ id: id, img: imageURL, name: name, price: price })}>
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>

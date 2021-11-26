@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   const id = req.query.id;
   const query = `SELECT * FROM ${connection.db_name}.product WHERE id = ?`;
   try {
-    connection.db.query(query, [id], (err, results) => {
+    connection.connection.query(query, [id], (err, results) => {
       res.status(200).send(results);
     });
   } catch (err) {
