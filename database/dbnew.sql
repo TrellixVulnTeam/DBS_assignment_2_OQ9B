@@ -102,13 +102,13 @@ CREATE TABLE `order` (
   `totalPrice` double(10,2) NOT NULL,
   `status` varchar(255) NOT NULL,
   `paymentTime` timestamp,
-  `ownerID` INT NOT NULL,
-  `productID` INT NOT NULL,
-  `companyID` INT,
+  `ownerID` INT,
+  `productID` INT,
+  `companyID` INT NOT NULL,
   PRIMARY KEY (`transID`, `orderID`),
    foreign key (`transID`) references `transaction` (`transId`) on delete cascade,
-   foreign key (`ownerID`) references `product` (`ownerID`) on delete cascade,
-   foreign key (`productID`) references `product` (`id`) on delete cascade,
+    FOREIGN KEY (productID, ownerID)
+	REFERENCES product (id, ownerID) ON DELETE SET NULL,
    foreign key (`companyID`) references `company` (`companyID`) on delete cascade
 );
 
@@ -153,7 +153,7 @@ CREATE TABLE `deliver` (
   `dOrderId` int NOT NULL,
   `dOrderStatus` varchar(255) NOT NULL,
   `startDate` TIMESTAMP NOT NULL,
-  `endDate` TIMESTAMP,
+  `endDate` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`dCompanyId`, `dTransactionId`, `dOrderId`),
    foreign key (`dCompanyId`) references `company` (`companyID`) on delete cascade,
    foreign key (`dTransactionId`, `dOrderId`) references `order` (transID, orderID) on delete cascade
