@@ -1,7 +1,8 @@
-host: us-cdbr-east-04.cleardb.com
-username: b4775c762aff31
-password: 19f9ba66
-database: heroku_d9e1dcc33e5346d
+const host_name = "us-cdbr-east-04.cleardb.com";
+const db_name = "heroku_89cd7c1b2904388";
+const db_user = "bbc9d6f776f77a";
+const db_password = "28c9feff";
 
 
-mysql://b4775c762aff31:19f9ba66@us-cdbr-east-04.cleardb.com/heroku_d9e1dcc33e5346d?reconnect=true
+
+mysql://bbc9d6f776f77a:28c9feff@us-cdbr-east-04.cleardb.com/heroku_89cd7c1b2904388?reconnect=true

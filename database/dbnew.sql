@@ -151,7 +151,6 @@ CREATE TABLE `deliver` (
   `dCompanyId` int NOT NULL,
   `dTransactionId` int NOT NULL,
   `dOrderId` int NOT NULL,
-  `dOrderStatus` varchar(255) NOT NULL,
   `startDate` TIMESTAMP NOT NULL,
   `endDate` TIMESTAMP NULL DEFAULT NULL,
   PRIMARY KEY (`dCompanyId`, `dTransactionId`, `dOrderId`),
