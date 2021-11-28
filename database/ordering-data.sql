@@ -29,8 +29,7 @@ INSERT INTO `deliver` (`dCompanyId`, `dTransactionId`, `dOrderId`, `dOrderStatus
 (2, 3, 3, 'PROCESSING', '2021-11-16 08:20:55', '0000-00-00 00:00:00'),
 (5, 4, 4, 'PROCESSING', '2021-10-16 11:20:48', '0000-00-00 00:00:00'),
 (3, 5, 5, 'PROCESSING', '2021-10-20 13:10:01', '0000-00-00 00:00:00'),
-(3, 6, 6, 'SUCCESS', '2021-11-01 16:30:00', '2021-11-15 13:12:11'),
-(2, 7, 7, 'SUCCESS', '2020-11-25 16:12:11', '2021-11-25 11:12:13');
+(3, 6, 6, 'SUCCESS', '2021-11-01 16:30:00', '2021-11-15 13:12:11');
 
 INSERT INTO `contact` (`dCompanyId`, `phoneNum`, `dCompanyAddr`) VALUES 
 (1, '0983411642', '268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh'),
