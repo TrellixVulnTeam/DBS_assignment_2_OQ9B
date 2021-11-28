@@ -17,7 +17,7 @@ const Header = props => {
     return (
         <nav className='navbar navbar-expand-lg navbar-dark bg-main p-2'>
 
-            <h3 className='nav-brand text-white col-md-3 d-flex justify-content-start'>HCMUTshopee</h3>
+            <h3 className='nav-brand text-white col-md-3 d-flex justify-content-start text-uppercase'>Kênh người bán hàng</h3>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -47,7 +47,7 @@ const Header = props => {
                     <ul className="navbar-nav ml-auto">
                             
                             <li className="nav-item active">
-                                <Link className="nav-link" to='/signin'>Thông tin tài khoản</Link>
+                                <Link className="nav-link" to='/shopstats'>Thông tin tài khoản</Link>
                             </li>
                             <li className="nav-item active">
                                 <button className='btn' onClick={handleLogout}>Đăng xuất</button>

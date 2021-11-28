@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import {useRef, useState } from "react";
 import { login } from "../api/services";
 import { getUser, setUser } from "../utils/func";
 import {Navigate, useNavigate} from "react-router";
@@ -9,18 +9,32 @@ const SignInPage = props => {
     const accountRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
+    
+    const [warningText, setWarningText] =  useState("");
 
-    const handleLogin = () =>
+
+    const handleLogin = (event) =>
     {
       
       login(accountRef.current.value, passwordRef.current.value)
       .then(
         result => {
-          if (result.data.isSuccess)
+          
+          if (result.data.isSuccess) {
             setUser(result.data.data);
+            setWarningText("")
             navigate('/');
+          }
+          else {
+            console.log(result.data.message);
+            setWarningText(result.data.message);
+          }
+          
         }
-      )
+      ).catch(error => 
+        setWarningText("Error")
+      );
+      
     }
 
     return !getUser() ? (
@@ -51,6 +65,10 @@ const SignInPage = props => {
                   </div>
 
                   <div className="text-center text-lg-start mt-4 pt-2">
+                    <span className='text-danger font-weight-bold'>{warningText !== "" ? warningText : ""}</span>
+                    <br />
+                    <br />
+
                     <button type="button" className="btn btn-outline-primary btn-lg"
                       onClick={handleLogin}
                       >Đăng nhập</button>

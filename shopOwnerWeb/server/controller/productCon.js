@@ -71,4 +71,27 @@ module.exports = (app) => {
      
      });
 
+     app.get('/get-all-order/:ownerID/:id' , (req , res)=>{
+     
+        const data = {
+            id: req.params.id,
+            ownerID: req.params.ownerID
+        };
+        
+        product.getAllOrderOfProduct(data, result => {
+
+            res.send(result);
+        });
+     })
+     
+     app.get('/get-order-shop/:ownerID' , (req , res)=>{
+        
+        console.log(req.params);
+        product.getShopOrder(req.params.ownerID, result => {
+
+            res.send(result);
+        })
+     
+     })
+
 }

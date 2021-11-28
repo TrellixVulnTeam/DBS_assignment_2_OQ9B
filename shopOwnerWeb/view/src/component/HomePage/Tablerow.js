@@ -2,13 +2,13 @@ import { useNavigate } from "react-router";
 import { deleteProduct } from "../../api/services";
 
 
-const Tablerow = ({product, number, changeEditModalItem}) => {
+const Tablerow = ({product, number, changeEditModalItem, action}) => {
 
     const navigate = useNavigate();
 
     const handleOnDelete = (event) => {
       
-      deleteProduct(product.id);
+      deleteProduct(product.id).then(result => action());
       event.preventDefault();
     }
 

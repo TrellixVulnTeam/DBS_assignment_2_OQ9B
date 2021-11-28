@@ -71,10 +71,20 @@ const deleteProduct = (id) => {
 
 
         axios.get(url + 'delete-product/' + getUserID() + '/' + id)
-        .then(result => console.log(result))
-        .catch(error => console.log(error));
+        .then(result => resolve(result))
+        .catch(error => reject(error));
+    })
+}
+
+const getAllOrder = (id) => {
+
+    return new Promise((resolve, reject) =>{
+
+        axios.get(url + 'get-all-order/' + getUserID() + '/' + id)
+        .then(result => resolve(result.data.data)).
+        catch(error => reject(error));
     })
 }
 
 
-export {addProduct, getProduct, login, updateProduct, deleteProduct, getProductByID};
+export {addProduct, getProduct, login, updateProduct, deleteProduct, getProductByID, getAllOrder};

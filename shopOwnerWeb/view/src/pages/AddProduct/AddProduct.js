@@ -1,6 +1,6 @@
-import {useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import { addProduct } from '../../api/services';
-import { getUserID, getUser} from '../../utils/func';
+import { getUserID} from '../../utils/func';
 
 const AddProduct = props => {
 
@@ -10,29 +10,77 @@ const AddProduct = props => {
     const amountRef = useRef();
     const typeRef = useRef();
     const descriptionRef = useRef();
+    const RUNNING = "ĐANG CHẠY";
+    const FAIL = "THẤT BẠI";
+    const SUCCESS = "THÀNH CÔNG";
+    const [statusText, setStatusText] = useState("ĐANG CHẠY");
+    const [warningText, setWarningText] = useState("");
 
-    const handleOnSubmit = async () => {
+    const [data, setData] = useState({
 
-      const data = {
-        ownerID: getUserID(),
-        amount: amountRef.current.value,
-        name: nameRef.current.value,
-        description: descriptionRef.current.value,
-        price: priceRef.current.value,
-        type: typeRef.current.value,
-        imageURL: imageURLRef.current.value
+      ownerID: getUserID(),
+      amount: "",
+      name: "",
+      description: "",
+      price: "",
+      type: "",
+      imageURL: ""
+
+    });
+
+    useEffect(() => {
+
+      setStatusText(RUNNING);
+
+    }, []);
+
+    
+    const handleOnSubmit =  () => {
+
+      if (validateData()) {
+        addProduct(data)
+        .then(result => {
+          if (result)
+          { 
+            setStatusText(SUCCESS);
+            setWarningText("");
+          }
+          else {
+
+          }
+        })
+        .catch(error => setStatusText(FAIL));
+        }
+      else {
+        setStatusText("GIÁ TRỊ KHÔNG HỢP LỆ");
       }
-      
-      await addProduct(data)
-      .then(result => {
-        amountRef.current.value = '';
-        nameRef.current.value = '';
-        descriptionRef.current.value = '';
-        priceRef.current.value = '';
-        typeRef.current.value = '';
-        imageURLRef.current.value = '';
-      })
-      .catch(error => console.log(error));
+    };
+
+    const validateData = () => {
+
+      console.log(data);
+      if (data.name === "" || data.type === "" || data.description === "" || data.price === "" 
+        || data.imageURL === "" ||  data.name === "") {
+        setWarningText("Không được để trống!");
+        return false;
+      }
+      else if (data.price < 0 || data.amount < 0)
+      {
+        setWarningText("GIÁ TRỊ SỐ KHÔNG HỢP LỆ");
+        return false;
+      }
+      setWarningText("");
+      return true;
+    }
+
+    const handleOnChange = async event => {
+
+       
+
+        data[event.target.name] = event.target.value;
+        setData({...data});
+        validateData();
+             
     }
 
     return (
@@ -42,26 +90,52 @@ const AddProduct = props => {
         </div>
         <form className='mt-5'>
           
-          <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' ref={nameRef} required/>
+          <div className="form-group d-flex flex-row">
+            <input type="text" className="form-control p-3 text-center" placeholder="Nhập tên sản phẩm" name='name' defaultValue={data.name}  onChange={handleOnChange}/>
           </div>
-          <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập đường dẫn hình ảnh" name='imageURL' ref={imageURLRef} required/>
+          <div className="form-group d-flex flex-row">
+            <input type="text" className="form-control p-3 text-center" placeholder="Nhập đường dẫn hình ảnh" name='imageURL' defaultValue={data.imageURL}  onChange={handleOnChange}/>
           </div>
-          <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập giá" name='price' ref={priceRef} required/>
+          <div className="form-group d-flex flex-row">
+            <input type="number" className="form-control p-3 text-center" placeholder="Nhập giá" name='price' defaultValue={data.price} onChange={handleOnChange}/>
           </div>
-          <div class="form-group d-flex flex-row">
-            <input type="number" class="form-control p-3 text-center" placeholder="Nhập số lượng" name='amount' ref={amountRef} required/>
+          <div className="form-group d-flex flex-row">
+            <input type="number" className="form-control p-3 text-center" placeholder="Nhập số lượng" name='amount' defaultValue={data.amount} onChange={handleOnChange}/>
           </div>
-          <div class="form-group d-flex flex-row">
-            <input type="text" class="form-control p-3 text-center" placeholder="Nhập loại sản phẩm" name='type' ref={typeRef} required/>
+          <div className="form-group d-flex flex-row">
+            <input type="text" className="form-control p-3 text-center" placeholder="Nhập loại sản phẩm" name='type' defaultValue={data.type} onChange={handleOnChange}/>
           </div>
-          <div class="form-group d-flex flex-row">
-            <textarea class="form-control" name='description' rows="3" ref={descriptionRef} required={true}></textarea>
+          <div className="form-group d-flex flex-row">
+            <textarea className="form-control" name='description' rows="3" defaultValue={data.description} onChange={handleOnChange} ></textarea>
           </div>
-          <button type="button" class="btn btn-outline-info w-100 p-3 text-uppercase" onClick={handleOnSubmit}>Thêm</button>
+          <p className='text-danger text-uppercase'>{warningText}</p>
+          <button type="button" className="btn btn-outline-info w-100 p-3 text-uppercase" 
+          data-toggle="modal" data-target="#statusModal"
+          onClick={handleOnSubmit}>Thêm</button>
         </form>
+
+        <div className="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModal" aria-hidden="true">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="statusModal">TRẠNG THÁI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body text-uppercase">
+                {statusText}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                {
+                  statusText === FAIL ? <button type="button" className="btn btn-danger">THỬ LẠI</button> : null
+                }
+              </div>
+            </div>  
+          </div>
+      </div>
+        
       </div>
     )
 }

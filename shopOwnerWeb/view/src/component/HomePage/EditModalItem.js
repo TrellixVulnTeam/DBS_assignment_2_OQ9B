@@ -16,6 +16,7 @@ const EditModalItem = ({item, action}) => {
   });
 
   const [submitStatus, setStatus] = useState("");
+  
 
   useEffect(() => {
 
@@ -33,21 +34,46 @@ const EditModalItem = ({item, action}) => {
   }, [item]);
 
 
+  const validateData = () => {
+
+    if (data.name === "" || data.type === "" || data.description === "" || data.price === "" 
+      || data.imageURL === "" ||  data.name === "") {
+        setStatus("Không được để trống!");
+      return false;
+    }
+    else if (data.price < 0 || data.amount < 0)
+    {
+      setStatus("GIÁ TRỊ SỐ KHÔNG HỢP LỆ");
+      return false;
+    }
+    setStatus("");
+    return true;
+  }
+
   const handleOnChange = event => {
     
     data[event.target.name] = event.target.value;
     setData({...data});
+    validateData();
   }
 
   const handleOnSubmit =(event) => {
     
-    updateProduct(data)
-    .then(result => 
-    {
-      action();
-      console.log(result);
-      setStatus(result.data.message);
-    });
+    if (validateData()) {
+      updateProduct(data)
+      .then(result => 
+      {
+        action();
+        console.log(result);
+        setStatus(result.data.message);
+      })
+      .catch(error => {
+        setData(error.data.message);
+      }) 
+      ;
+    } else {
+      
+    }
     event.preventDefault();
   }
     
@@ -83,7 +109,7 @@ const EditModalItem = ({item, action}) => {
           <div className="form-group d-flex flex-row">
             <textarea className="form-control" name='description' rows="3" value={data.description} onChange={handleOnChange}></textarea>
           </div>
-          <span className='text-danger' style={{fontSize:"1.5rem"}}>{submitStatus}</span>
+          <span className='text-danger text-uppercase' style={{fontSize:"1.5rem"}}>{submitStatus}</span>
         </div>
         <div className="modal-footer">
          

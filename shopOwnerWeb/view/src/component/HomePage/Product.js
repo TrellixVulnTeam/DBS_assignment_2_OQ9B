@@ -4,7 +4,7 @@ import { deleteProduct } from "../../api/services";
 const Product = ({product, action}) => {
 
     const handleOnDelete = (event) => {
-        console.log("132132");
+        
         deleteProduct(product.id).then(
            result => action()
         );

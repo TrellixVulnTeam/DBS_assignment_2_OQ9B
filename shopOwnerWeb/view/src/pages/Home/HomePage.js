@@ -4,11 +4,11 @@ import EditModalItem from "../../component/HomePage/EditModalItem";
 import './HomePage.css';
 import { getProduct } from "../../api/services";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const HomePage = props => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [isChanged, setChange] = useState(false);
     const [editModalItem, changeEditModalItem] = useState({

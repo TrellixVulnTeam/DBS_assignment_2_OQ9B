@@ -8,9 +8,13 @@ module.exports = {
         return new Promise((resolve, reject) => {
 
             connector.query(sql, (error, result)=>{
+
+                
+                
                 if (error){
                     return reject(error);
                 }
+                
                 return resolve(result);
             }
             )
