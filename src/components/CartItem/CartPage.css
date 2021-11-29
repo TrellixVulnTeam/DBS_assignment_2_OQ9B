@@ -125,6 +125,27 @@
   padding: 0 20px;
 }
 
+.total1{
+  padding: 0 20px;
+  font-size: 22px;
+  height: 50px;
+  width: 180px;
+  margin-left: 800px;
+}
+
+.total2{
+  background-color: #B9C2CB;
+  padding: 0 20px;
+  font-size: 30px;
+  border-radius: 10px;
+  height: 50px;
+  width: auto;
+  margin-left: 10px;
+  color: red;
+  font-weight: 50;
+  font-family: "Helvetica Neue", Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "儷黑 Pro", "LiHei Pro", "Heiti TC", 微軟正黑體, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif;
+}
+
 .CartItem .row3 .group-1 #button-1:hover{
   background: #1DB8E0;
 }
@@ -201,6 +222,7 @@
 
 .CartFooter .row1 .col1{
   flex-basis: 70%;
+  font-size: 28px;
 }
 
 .CartFooter input{

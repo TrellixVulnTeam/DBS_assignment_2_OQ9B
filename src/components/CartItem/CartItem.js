@@ -1,4 +1,3 @@
-
 import upIcon from './upArrow.svg';
 import downIcon from './downArrow.svg';
 import './CartPage.css';
@@ -38,19 +37,19 @@ function CartItem({ item, update, Xoa }) {
   return (
     <div class="row2">
       <div class="col1">
-        <img src={item.props.img} style={{ height: "180px", width: "200px" }} />
+        <img src={item.props.img} style={{ height: "165px", width: "260px" }} />
       </div>
       <div class="col1">
         {item.props.name}
       </div>
       <div class="col1">
-        {item.props.price}đ
+        {item.props.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
       </div>
       <div class="col1">
         <Number_Stepper />
       </div>
       <div class="col1">
-        {item.props.price * item.props.amount}đ
+        {(item.props.price * item.props.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}đ
       </div>
       <div class="col2">
         <input id="delete_button" type="button" value="Xóa" onClick={() => Xoa(item.props.id)} />

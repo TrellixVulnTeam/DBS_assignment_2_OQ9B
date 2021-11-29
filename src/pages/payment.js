@@ -7,13 +7,8 @@ const Payment = () => {
     <div style={{ "min-height": "90vh" }}>
       <div className="container mt-3">
         <div class="row">
-          <div class="col-sm-5">
-            <div style={{"padding": "50px"}}>
-                <ItemCustomer/>
-            </div>
-          </div>
           <div class="col-sm-7">
-            <div style={{"padding": "100px"}}>
+            <div style={{"padding": "50px"}}>
                 <ItemOrder/>
             </div>
           </div>

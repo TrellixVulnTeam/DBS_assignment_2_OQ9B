@@ -5,12 +5,14 @@ import { Container, ProImg, InfoSection, NormalBtn, BtnContainer } from './Displ
 import PopUp from './PopUp';
 import { AddToCart } from '../../pages/cart';
 import priceWithDots from '../products/priceWithDots';
+import axios from 'axios';
 function ProInfo(props) {
   //url to product  
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
       AddToCart({ id: id, img: imageURL, name: name, price: price })
+      axios.post('http://localhost:5000/payment/productInCart', { id: id, img: imageURL, name: name, price: price })
     }
     setAddToCart(true);
   }

@@ -55,7 +55,7 @@ const Cart = () => {
     {
       sum += ItemList[i].props.price*ItemList[i].props.amount;
     }
-    return sum;
+    return sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
   function XoaHet() {
     setItemList([]);
@@ -73,7 +73,7 @@ const Cart = () => {
     localStorage.setItem('cart',JSON.stringify(ItemList));
   }
   return (
-    <div style={{ "min-height": "70vh" }}>
+    <div style={{ "min-height": "70vh"}}>
       <div class="container cartpage">
         <Title title="Giỏ hàng" />
         <div class="CartItem">
@@ -104,10 +104,10 @@ const Cart = () => {
             <div id="text">Cộng giỏ hàng</div>
             <div class="row1">
               <div class="col1"> Tổng đơn:</div>
-              <div class="col2">{Sum}đ</div>
+              <div class="col1">{Sum}đ</div>
             </div>
             <Link to="/payment">
-              <input type="button" value="Đặt hàng ngay" />
+              <input type="button" value="Thanh toán ngay" />
             </Link>
           </div>
         </div>
