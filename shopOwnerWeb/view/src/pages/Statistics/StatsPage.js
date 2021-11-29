@@ -1,8 +1,9 @@
 import { useParams } from "react-router";
-import { getAllOrder, getProductByID } from "../../api/services";
+import { getAllOrder, getProductByID, getReview} from "../../api/services";
 import { useEffect, useState } from "react";
 import ProductDetail from "../../component/Statistics/ProductDetail";
 import OrderTable from "../../component/Statistics/OrderTable";
+import ReviewTable from "../../component/Statistics/ReviewTable";
 
 const StatsPage = props => {
 
@@ -10,14 +11,21 @@ const StatsPage = props => {
 
     const [product, setProduct] = useState(null);
     const [orders, setOrders] = useState([]);
+    const [reviews, setReviews] = useState([]);
     useEffect( () => {
 
          getProductByID(params.id).then(result => setProduct(result));
         
         getAllOrder(params.id).then(result => {
         
-        console.log(result);
+        // console.log(result);
         setOrders(result)});
+
+        getReview(params.id).then(result => 
+        {   
+            console.log(result);
+            setReviews(result)
+        });
         
     }, [params.id]);
 
@@ -30,6 +38,8 @@ const StatsPage = props => {
             <div className='col-12 col-xl-8 py-5'>
                 <h3 className='text-uppercase text-primary'>Danh sách các đơn hàng của sản phẩm</h3>
                 <OrderTable orders={orders}/>
+                <h3 className='text-uppercase text-primary mt-5'>Danh sách các bình luận của sản phẩm</h3>
+                <ReviewTable reviews={reviews}/>
             </div>
         </div>
         : <div class="spinner-border" role="status">

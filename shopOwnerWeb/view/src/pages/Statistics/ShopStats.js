@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { getProduct } from "../../api/services";
+import { getProduct} from "../../api/services";
 
 const ShopStats = props => {
 
     const [products, setProducts] = useState([]);
+    
+
     let types = [];
     useEffect(() => {
 
@@ -13,6 +15,8 @@ const ShopStats = props => {
             console.log(result);
             setProducts(result)})
         .catch(error => setProducts([]));
+
+        
     }, []);
 
     function generateTypes() {

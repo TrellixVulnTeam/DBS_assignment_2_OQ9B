@@ -79,7 +79,7 @@ module.exports = (app) => {
         };
         
         product.getAllOrderOfProduct(data, result => {
-
+            
             res.send(result);
         });
      })
@@ -94,4 +94,17 @@ module.exports = (app) => {
      
      })
 
+     app.get('/review-on-product/:ownerID/:id' , (req , res)=>{
+     
+        const data = {
+            id: req.params.id,
+            ownerID: req.params.ownerID
+        };
+        
+        product.getReview(data, result => {
+
+            res.send(result);
+        });
+     
+     })
 }

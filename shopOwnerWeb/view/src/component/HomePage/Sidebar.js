@@ -1,16 +1,32 @@
+import { useState } from 'react';
 import './Sidebar.css';
 
 
-const Sidebar = props => {
+const Sidebar = ({action}) => {
 
+    const [value, setValue] = useState("");
 
+    function handleOnChange(event)
+    {   
+        
+        setValue(event.target.value);
+        action(value);
+    }
 
+    function handleOnClick(event)
+    {
+        event.preventDefault();
+        console.log(value);
+        action(value);
+    }
     return <section id="sidebar">
     <div className="input-group">
         <div className="form-outline">
-            <input type="search" id="form1" className="form-control rounded-0" placeholder='Tìm kiếm sản phẩm'/>
+            <input type="search" id="form1" className="form-control rounded-0" placeholder='Tìm kiếm sản phẩm'
+                onChange={handleOnChange}
+            />
         </div>
-        <button type="button" className="btn btn-primary rounded-0">
+        <button type="button" className="btn btn-primary rounded-0" onClick={handleOnClick}>
             <i className="fas fa-search"></i>
         </button>
     </div>

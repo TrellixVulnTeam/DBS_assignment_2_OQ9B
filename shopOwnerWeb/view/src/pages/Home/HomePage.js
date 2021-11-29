@@ -11,6 +11,7 @@ const HomePage = props => {
     // const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [isChanged, setChange] = useState(false);
+    const [filterValue, setFilterValue] = useState("");
     const [editModalItem, changeEditModalItem] = useState({
         ownerID: 1,
         amount: 1,
@@ -25,10 +26,12 @@ const HomePage = props => {
 
         getProduct().
         then(result => {
-            console.log(result);
-            setProducts(result)})
+            // console.log(result);
+            const items = result.filter(item => item.name.toLowerCase().includes(filterValue) || filterValue === '');
+            console.log(items);
+            setProducts(items)})
         .catch(error => setProducts([]));
-    }, [isChanged]);
+    }, [isChanged, filterValue]);
 
     const toggleChange = () => {
         setChange(!isChanged);
@@ -37,7 +40,7 @@ const HomePage = props => {
     return <div className='row home-page py-3'>
         <div className='col-12 col-lg-2 pb-2'>
             <div class="sticky-top">
-                <Sidebar />
+                <Sidebar action = {setFilterValue}/>
             </div>
         </div>
         

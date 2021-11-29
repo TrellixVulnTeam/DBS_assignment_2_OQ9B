@@ -37,12 +37,17 @@ module.exports = {
         .catch(error => callback(false));
     },
     update: (data, callback) => {
-        const sql = `UPDATE product set amount=${data.amount}, name="${data.name}", 
-         description="${data.description}", price=${data.price}, type="${data.type}"
-        , imageURL="${data.imageURL}"
-         where ownerID=${data.ownerID} and id=${data.id}
-         `;
-        
+        // const sql = `UPDATE product set amount=${data.amount}, name="${data.name}", 
+        //  description="${data.description}", price=${data.price}, type="${data.type}"
+        // , imageURL="${data.imageURL}"
+        //  where ownerID=${data.ownerID} and id=${data.id}
+        //  `;
+        const sql = `CALL updateProduct(${data.ownerID}, ${data.id}, "${data.name}", ${data.price}, ${data.amount},
+        "${data.description}",
+       "${data.description}", 
+       "${data.imageURL}"
+        )`;
+        console.log(sql);
         query.awaitQuery(sql).then(result => {
             if (result.affectedRows > 0) {
 
@@ -79,11 +84,13 @@ module.exports = {
 
         const sql = `CALL get_all_order_of_product(${data.ownerID}, ${data.id})`;
         query.awaitQuery(sql).then(
-            result => {                
+            result => {            
+            
                 callback({isSuccess: true, data: result[0]});
             }
         )
         .catch(error => {
+            
             callback({isSuccess: false, data: error});
         })
     },
@@ -98,5 +105,19 @@ module.exports = {
         .catch(error => {
             callback({isSuccess: false, data: error});
         })
+    },
+    getReview: (data, callback) => {
+
+        const sql = `SELECT * FROM review JOIN shopuser s ON 
+        review.customerID = s.id AND review.ownerID = ${data.ownerID} AND review.productID = ${data.id}`;
+
+        query.awaitQuery(sql)
+        .then(
+            result => callback({isSuccess:true, data: result})
+        )
+        .catch(error => 
+            callback({isSuccess:false, data: error})
+        )
+        
     }
 };

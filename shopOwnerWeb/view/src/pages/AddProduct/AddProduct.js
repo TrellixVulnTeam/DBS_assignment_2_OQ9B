@@ -4,12 +4,12 @@ import { getUserID} from '../../utils/func';
 
 const AddProduct = props => {
 
-    const nameRef = useRef();
-    const imageURLRef = useRef();
-    const priceRef = useRef();
-    const amountRef = useRef();
-    const typeRef = useRef();
-    const descriptionRef = useRef();
+    // const nameRef = useRef();
+    // const imageURLRef = useRef();
+    // const priceRef = useRef();
+    // const amountRef = useRef();
+    // const typeRef = useRef();
+    // const descriptionRef = useRef();
     const RUNNING = "ĐANG CHẠY";
     const FAIL = "THẤT BẠI";
     const SUCCESS = "THÀNH CÔNG";
