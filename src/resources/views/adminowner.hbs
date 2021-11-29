@@ -1,0 +1,87 @@
+<h1 id="header-main" style="display:None;">Danh sách Cửa hàng</h1><br>
+<button id="btn-in-month" class="btn btn-success" style="display:None;">Doanh thu trong tháng</button>
+<h1 id="header-month">Đơn hàng của cửa hàng tháng này</h1>
+<button id="btn-shop-owner" class="btn btn-info">Tất cả cửa hàng</button>
+<div class="form-group">
+
+    <style>
+    table{
+        display: block;
+        box-shadow: 2px 2px 2px rgb(62, 62, 62);
+        border-radius: 5px;
+        padding: 10px;
+    }
+    table,tr,td,th{
+        margin: 10px;
+    }
+    button{
+        height: 60px;
+        width: 120px;
+    }
+    </style>
+    <table id="revenue-shop-owner">
+        <tr> 
+            <th>Tên shop</th>
+            <th>Mã Chủ cửa hàng</th>
+            <th>Tổng giá trị đơn hàng</th>
+            <th>Số đơn hàng</th>
+        </tr>
+       {{#each data}} 
+        <tr>
+            <td>{{shopName}}</td>
+            <td>{{ownerID}}</td>
+            <td>{{price}} Đ</td>
+            <td>{{quantity}}</td>
+        </tr>
+       {{/each}} 
+    </table>
+    <table id="shop-owner" style="display:none;">
+        <tr> 
+            <th>ID shop</th>
+            <th>Tên shop</th>
+            <th>Ngày bắt đầu bán</th>
+            <th>Ngày kết thúc bán</th>
+            <th>Trạng thái</th>
+            <th>Tài khoản</th>
+            <th>Tên chủ shop</th>
+            <th>Số điện thoại</th>
+            <th>địa chỉ</th>
+            <th>Email</th>
+        </tr>
+       {{#each total}} 
+        <tr>
+            <td>{{shopOwnerID}}</td>
+            <td>{{shopName}}</td>
+            <td>{{formatDate startDate}}</td>
+            <td>{{formatDate endDate}}</td>
+            <td>{{status}}</td>
+            <td>{{account}}</td>
+            <td>{{lastname}}{{firstname}}</td>
+            <td>{{phonenumber}}</td>
+            <td>{{address}}</td>
+            <td>{{email}}</td>
+        </tr>
+       {{/each}} 
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $('#btn-shop-owner').click(function() {
+         $('#header-main').css('display', 'block');
+        $('#header-month').css('display', 'none');
+        $('#revenue-shop-owner').css('display', 'none');
+        $('#shop-owner').css('display', 'block');
+        $('#btn-in-month').css('display', 'inline-block');
+        $('#btn-shop-owner').css('display', 'none');
+    })
+    $('#btn-in-month').click(function() {
+        $('#header-main').css('display', 'none');
+        $('#header-month').css('display', 'block');
+        $('#revenue-shop-owner').css('display', 'block');
+        $('#shop-owner').css('display', 'none');
+        $('#btn-in-month').css('display', 'none');
+        $('#btn-shop-owner').css('display', 'inline-block');
+    })
+</script>

@@ -1,0 +1,38 @@
+<h3>{{#each price}}Tổng Giá trị đơn hàng đã giao: {{price}} VNĐ {{/each}}</h3><br>
+<div class="form-group">
+
+    <style>
+    table{
+        box-shadow: 2px 2px 2px rgb(62, 62, 62);
+        border-radius: 5px;
+        width: 400px;
+        padding: 10px;
+    }
+    table,tr,td,th{
+        margin: 10px;
+        border:1px solid rgb(62, 62, 62);
+    }
+    </style>
+    <table>
+            
+        <tr>
+           <th colspan="2">Các Chi nhánh: </th>
+        </tr>
+        <tr> 
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+        </tr>
+       {{#each data}} 
+        <tr>
+            <td>{{phonenumb}}</td>
+            <td>{{dCompanyAddr}}</td>
+        </tr>
+       {{/each}} 
+    </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+</script>

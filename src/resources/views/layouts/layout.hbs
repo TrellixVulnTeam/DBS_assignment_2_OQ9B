@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+    {{#if lay}}
+    <title>Delivery</title>
+    {{else}}
+    <title>Admin</title>
+    {{/if}}
+</head>
+<style>
+    
+    table,tr,td,th{
+        margin: 5px;
+        padding:5px;
+        background-color: rgb(255, 255, 255);
+        text-align: center;
+    }
+    img{
+        height:50px;
+    }
+    button{
+        height:50px;
+        width:100px;
+        padding:3px;
+    }
+    h1{
+        text-align: center;
+    }
+    body {
+        background-color:#ebf0f5;
+        text-align: center;
+    }
+    header{
+        background-color:rgb(49, 238, 172);
+        padding:10px;
+        height:65px;
+    }
+    .form-group{
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<body>
+    {{>sidebar}}
+    {{{body}}}
+</body>
+</html>

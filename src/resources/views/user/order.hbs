@@ -1,0 +1,64 @@
+    <h1>Xem đơn hàng</h1>
+    <h2>Tổng chi tiêu tháng này: <span id="total" name="{{id}}">0</span> Đ</h2>
+<div class="form-group">
+<style>
+    table{
+        box-shadow: 2px 2px 2px rgb(62, 62, 62);
+        border-radius: 5px;
+        width: 700px;
+    }
+    tr{
+        border:2px solid black;
+    }
+</style>
+    
+    <table>
+        <tr> 
+            <th>tên sản phẩm</th>
+            <th>Tổng giá</th>
+            <th>Tình trạng</th>
+            <th></th>
+        </tr>
+       {{#each data}} 
+        <tr>
+            <td>{{name}}</td>
+            <td>{{totalPrice}}</td>
+            <td>{{status}}</td>
+            <td><img src="{{imageURL}}"></td>
+            <td><a href="./order/detail?IDtrans={{transID}}&IDorder={{orderID}}" class="btn btn-primary">Chi tiết</a></td>
+        </tr>
+       {{/each}} 
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url:"/order/total",
+            method: "GET",
+            data:{
+                id: $('#total').attr('name')
+            },
+            success:function(data){
+                $('#total').text(data['total'])
+            }
+        });
+    })
+</script>
+
+{{!-- $.ajax({
+                url:"/order/total",
+                method: "GET",
+                data:{
+                    id: span
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data == "Success"){
+                        location.reload();
+                    }
+                }
+            }); --}}
