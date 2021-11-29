@@ -35,3 +35,19 @@ export const Review = styled.div`
     margin: auto;
 
 `
+export const RatingContainer = styled.div`
+    width: 1000px;
+    margin: 80px auto;
+    display: grid;
+    grid-template-columns: auto;
+    padding: 50px 0;
+    background-color: #EEEEEE;
+    gap: 15px;
+    position: relative;
+    top: -350px;
+`
+export const RatingItem = styled.div`
+    text-align: center;
+    padding: 15px 0;
+    font-size: 18px;
+`

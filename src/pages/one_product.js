@@ -1,22 +1,38 @@
+import React, { useState, useEffect } from "react";
 import Description from "../components/OneProduct/Description";
 import Display from '../components/OneProduct/Display'
 import ReviewContainer from "../components/OneProduct/Review";
-import SimilarProducts from "../components/OneProduct/SimilarProducts";
-import { homeGuitarList } from "../data/HomePage/guitar_data";
 import { withRouter } from 'react-router-dom';
-import { featureProd } from "../data/ProductData/feature_products";
-import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 const ProductInfo = (props) => {
 
   const id = props.match.params.id;
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const userID = JSON.parse(localStorage.getItem('token'));
 
-  useEffect(() => {
-    fetchData();
-  }, [])
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [feedback, setFeedBack] = useState([]);
+  const [shopID, setShopID] = useState();
+
+  useEffect(async () => {
+    await fetchFeedBack();
+    await fetchData();
+  }, [product])
+
+
+  const fetchFeedBack = async () => {
+    axios.get('http://localhost:5000/products/details/feedback', {
+      params: {
+        productID: id,
+        customerID: userID[0].id
+      }
+    }).then((response) => {
+      setFeedBack(response.data);
+    }).catch(e => {
+      console.log(e);
+    });
+  }
 
   const fetchData = () => {
     axios.get('http://localhost:5000/products/detail', {
@@ -25,8 +41,6 @@ const ProductInfo = (props) => {
       }
     }).then((response) => {
       setProduct(response.data[0]);
-      console.log('Received data');
-      console.log(response.data);
     }).then(() => setLoading(false)).catch(e => {
       console.log(e);
     });
@@ -38,7 +52,7 @@ const ProductInfo = (props) => {
       <Display display={product}
       />
       <Description description={product} />
-      <ReviewContainer />
+      <ReviewContainer feedback={feedback} id={id} shopID={product.ownerID} />
     </div>)
   );
 };

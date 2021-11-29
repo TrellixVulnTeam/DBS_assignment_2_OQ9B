@@ -12,8 +12,8 @@ export const Container = styled.div`
 `
 
 export const ProImg = styled.img`
-    height: 150px;
-    width: 200px;
+    height: 200px;
+    width: 250px;
     margin-left: -250px;
     margin-right: 40px;
 `

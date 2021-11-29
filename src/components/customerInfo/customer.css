@@ -1,0 +1,51 @@
+.customer-info-container .customer-info-img-container img {
+  height: 120px;
+}
+.customer-info-container .customer-info-img-container {
+  position: relative;
+  left: 180px;
+}
+
+.customer-info-container {
+  position: relative;
+  left: 200px;
+  top: 30px;
+}
+
+.customer-info-container h3 {
+  font-weight: 700;
+}
+
+.customer-order-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 0 0 -700px;
+}
+
+.order-item-container {
+  height: 110px;
+  width: 800px;
+  border: 1px solid black;
+  position: relative;
+  top: 30px;
+}
+
+.order-item-container img {
+  height: 100px;
+}
+
+.order-item-container h5 {
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.order-item-container .order-item-btns-container {
+  position: relative;
+  top: 10px;
+  right: -50px;
+}
+
+.order-item-container .order-item-btns-container button {
+  font-weight: 600;
+}

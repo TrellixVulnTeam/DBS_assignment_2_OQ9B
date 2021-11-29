@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import parseNumber from "./parseNumber";
-import { priceTag } from "./../../data/ProductData/priceTags"
 import axios from 'axios';
 const Context = React.createContext();
 
@@ -12,8 +10,11 @@ class Provider extends Component {
     filterBrandModal: false,
     filterPriceModal: false,
     productsByShop: JSON.parse(localStorage.getItem('productsByShop')) || [],
+    shopID: JSON.parse(localStorage.getItem('shopID')) || null,
     shops: [],
     productsFeatured: [],
+    productsFilterByPrice: [],
+    filterPrice: false,
   };
 
   componentDidMount() {
@@ -29,6 +30,18 @@ class Provider extends Component {
       });
   }
 
+  setFilterByPrice = () => {
+    this.setState({
+      filterPrice: true
+    })
+  }
+
+  unSetFilterByPrice = () => {
+    this.setState({
+      filterPrice: false
+    })
+  }
+
   setProducts = (shopId) => {
     let tempProducts = this.state.products;
     let tempProductsByShop = tempProducts.filter(product => product.ownerID === shopId);
@@ -36,6 +49,12 @@ class Provider extends Component {
       { productsByShop: tempProductsByShop },
       () => { localStorage.setItem('productsByShop', JSON.stringify(this.state.productsByShop)) }
     )
+  }
+
+  setProductsFilterByPrice = (data) => {
+    this.setState({
+      productsFilterByPrice: data
+    })
   }
 
   openModal = (type) => {
@@ -73,24 +92,20 @@ class Provider extends Component {
   }
 
   sortProducts = (type) => {
-    let tempProducts = [];
+    let tempProductsByShop = this.state.productsByShop;
 
-    this.state.products.forEach(item => {
-      const it = { ...item };
-      tempProducts = [...tempProducts, it];
-    });
     if (type === "a-z") {
-      tempProducts.sort((a, b) => a.title.localeCompare(b.title));
+      tempProductsByShop.sort((a, b) => a.name.localeCompare(b.name));
     } else if (type === "z-a") {
-      tempProducts.sort((a, b) => b.title.localeCompare(a.title));
+      tempProductsByShop.sort((a, b) => b.name.localeCompare(a.name));
     } else if (type === "ascen") {
-      tempProducts.sort((a, b) => (parseNumber(a.price) - parseNumber(b.price)));
+      tempProductsByShop.sort((a, b) => (a.price - b.price));
     } else if (type === "descen") {
-      tempProducts.sort((a, b) => (parseNumber(b.price) - parseNumber(a.price)));
+      tempProductsByShop.sort((a, b) => (b.price - a.price));
     }
 
     this.setState({
-      products: tempProducts
+      productsByShop: tempProductsByShop
     })
   }
 
@@ -106,23 +121,16 @@ class Provider extends Component {
     })
   }
 
-  filterByPrice = async (priceIndex, data) => {
-    await this.setProducts(data);
-
-    const tempProducts = this.state.products.filter((item) => {
-      console.log(item.price >= priceTag[priceIndex].value[0]);
-      return (parseNumber(item.price) >= parseNumber(priceTag[priceIndex].value[0]) && parseNumber(item.price) < parseNumber(priceTag[priceIndex].value[1]));
-    });
-
-    this.setState({
-      products: tempProducts
-    })
-  }
-
   setTitle = (title) => {
     this.setState({
       shopTitle: title
     }, () => { localStorage.setItem('shopTitle', JSON.stringify(this.state.shopTitle)) })
+  }
+
+  setShopId = (shopId) => {
+    this.setState({
+      shopID: shopId
+    }, () => { localStorage.setItem('shopID', JSON.stringify(this.state.shopID)) })
   }
 
   render() {
@@ -138,6 +146,10 @@ class Provider extends Component {
           filterByBrand: this.filterByBrand,
           setProductType: this.setProductType,
           filterByPrice: this.filterByPrice,
+          setFilterByPrice: this.setFilterByPrice,
+          unSetFilterByPrice: this.unSetFilterByPrice,
+          setProductsFilterByPrice: this.setProductsFilterByPrice,
+          setShopId: this.setShopId,
         }}
       >
         {this.props.children}

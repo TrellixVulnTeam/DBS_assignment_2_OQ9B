@@ -32,9 +32,15 @@ const Page = ({ data }) => {
     <>
       <Consumer>
         {value => {
-          return value.productsByShop.slice(pagination.start, pagination.perPage).map(product => {
-            return <Product key={product.id} product={product} />
-          })
+          if (!value.filterPrice) {
+            return value.productsByShop.slice(pagination.start, pagination.perPage).map(product => {
+              return <Product key={product.id} product={product} />
+            })
+          } else {
+            return value.productsFilterByPrice.slice(pagination.start, pagination.perPage).map(product => {
+              return <Product key={product.id} product={product} />
+            })
+          }
         }}
       </Consumer>
       <div className="row">
@@ -69,7 +75,13 @@ export default class ProductList extends Component {
           <div className="row">
             <PaginationProvider>
               <Consumer>
-                {value => (<Page data={value.products} />)}
+                {value => {
+                  if (!value.filterPrice) {
+                    return (<Page data={value.productsByShop} />)
+                  } else {
+                    return (<Page data={value.productsFilterByPrice} />)
+                  }
+                }}
               </Consumer>
             </PaginationProvider>
           </div>

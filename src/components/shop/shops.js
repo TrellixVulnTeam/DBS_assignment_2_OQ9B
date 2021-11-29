@@ -9,7 +9,7 @@ export default class Shop extends React.Component {
 
         return (
             <Consumer>
-                {value => <div className="col-sm-2 col-md-3 col-lg-2" onClick={() => { value.setTitle(shopName); value.setProducts(shopOwnerID); }}>
+                {value => <div className="col-sm-2 col-md-3 col-lg-2" onClick={() => { value.setTitle(shopName); value.setProducts(shopOwnerID); value.setShopId(shopOwnerID) }}>
                     <Link to="/product_list" style={{ textDecoration: 'none' }}>
                         <div className="container shop-card-container">
                             <div className="row shop-img-container">

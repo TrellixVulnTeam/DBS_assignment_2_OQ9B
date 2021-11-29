@@ -28,6 +28,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/filter", async (req, res) => {
+  const upperPrice = req.query.upperPrice;
+  const lowerPrice = req.query.lowerPrice;
+  const shopID = req.query.shopID;
+  console.log(shopID);
+  const query = `CALL ${connection.db_name}.SelectProductsOverPrice(?,?,?)`;
+  try {
+    connection.connection.query(query, [upperPrice, lowerPrice, shopID], (err, results) => {
+      res.status(200).send(results[0]);
+    });
+  } catch (err) {
+    console.log("ERROR: " + err);
+    res.send("FAILED");
+  }
+});
+
 router.post("/", async (req, res) => {
   res.send(200);
 });
