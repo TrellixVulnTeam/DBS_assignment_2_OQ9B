@@ -1,0 +1,7 @@
+host: us-cdbr-east-04.cleardb.com
+username: b4775c762aff31
+password: 19f9ba66
+database: heroku_d9e1dcc33e5346d
+
+
+mysql://b4775c762aff31:19f9ba66@us-cdbr-east-04.cleardb.com/heroku_d9e1dcc33e5346d?reconnect=true
