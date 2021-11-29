@@ -28,13 +28,23 @@ module.exports = {
     }
     ,
     add: (data, callback) => 
-    {
+    {   
+        console.log(data);
         const sql = `INSERT INTO product (ownerID, amount, name, description, price, type, imageURL)  
         VALUES ("${data.ownerID}", "${data.amount}", "${data.name}", 
         "${data.description}", "${data.price}", "${data.type}", "${data.imageURL}")`;
-        console.log(sql);
-        query.awaitQuery(sql).then(result => callback(true))
-        .catch(error => callback(false));
+        
+        if (data.amount === '' || data.price === '' || data.type === ''
+            || data.imageURL === ''
+        )
+        {
+            callback(false);
+            console.log(data);
+        }
+        else {
+            query.awaitQuery(sql).then(result => callback(true))
+            .catch(error => callback(false));
+        }
     },
     update: (data, callback) => {
         // const sql = `UPDATE product set amount=${data.amount}, name="${data.name}", 
@@ -44,7 +54,7 @@ module.exports = {
         //  `;
         const sql = `CALL updateProduct(${data.ownerID}, ${data.id}, "${data.name}", ${data.price}, ${data.amount},
         "${data.description}",
-       "${data.description}", 
+       "${data.type}", 
        "${data.imageURL}"
         )`;
         console.log(sql);

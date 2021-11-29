@@ -40,13 +40,14 @@ const AddProduct = props => {
       if (validateData()) {
         addProduct(data)
         .then(result => {
-          if (result)
+          
+          if (result.data)
           { 
             setStatusText(SUCCESS);
             setWarningText("");
           }
           else {
-
+            setStatusText(FAIL);
           }
         })
         .catch(error => setStatusText(FAIL));

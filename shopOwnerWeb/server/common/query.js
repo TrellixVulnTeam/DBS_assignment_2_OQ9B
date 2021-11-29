@@ -10,7 +10,7 @@ module.exports = {
             connector.query(sql, (error, result)=>{
 
                 
-                
+                console.log(sql);
                 if (error){
                     return reject(error);
                 }
