@@ -1,0 +1,40 @@
+#sidebar ul {
+    list-style: none;
+    padding: 5px
+}
+
+#sidebar li a {
+    color: darkgray;
+    text-decoration: none
+}
+
+#sidebar li a:hover {
+    text-decoration: none;
+    color: darksalmon
+}
+
+#sidebar .fa-circle {
+    font-size: 20px
+}
+
+#sidebar #red {
+    color: #e94545d7
+}
+
+#sidebar #teal {
+    color: rgb(69, 129, 129)
+}
+
+#sidebar #blue {
+    color: #0000ff
+}
+
+
+
+#sidebar .filter {
+    display: none;
+    padding: 0;
+    margin: 0
+}
+
+
