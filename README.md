@@ -1,31 +1,4 @@
-## Run npm install to install all modules
-
-
-npm install styled-components,
-npm install react-icons,
-npm install react-multi-carousel,
-npm install @atlaskit/textfield,
-npm install express,
-npm install --save-dev nodemon,
-npm install express-session,
-npm install mysql2,
-npm install cookie-parser,
-
-## Bootstrap
-
-### `npm i bootstrap`
-
-## React Router
-
-### `npm install react-router-dom`
-
-## React Select
-
-### `npm i --save react-select`
-
-## React-bootstrap
-
-### `npm install react-bootstrap bootstrap@5.1.3`
+## Run npm install to install all modules 
 
 # Getting Started with Create React App
 
