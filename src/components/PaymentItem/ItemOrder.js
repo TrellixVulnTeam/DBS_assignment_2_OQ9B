@@ -11,7 +11,7 @@ import './PaymentPage.css'
 function ItemOrder(props) {
 
     const [ItemList,setItemList] = useState([]);
-    const [Sum,SetSum] = useState(TinhTong());    
+    const [Sum,SetSum] = useState(TinhTong());  
 
     useEffect(() => {
     const StoredItemList = localStorage.getItem('cart');
@@ -71,20 +71,23 @@ function ItemOrder(props) {
         <div style={{ "min-height": "70vh" }}>
             <div class="container cartpage">
               <Title title="Thanh toán" />
+              <span style={{marginLeft:'960px', fontSize:'30px', border:'solid black', borderRadius:'10px', padding:'3px 20px', backgroundColor:'#1DB8E0', color:'white'}}>
+                  {Sum}
+              </span>
             </div>
             <div>
               {renderListProduct}
             </div>
 
             <div style={{display: 'block', width:'500px', marginLeft:'700px'}}>
-                <h3>Chọn phương thức thanh toán</h3>
+                <div style={{fontSize:'30px', marginLeft:'20px'}}>Chọn phương thức thanh toán</div>
                 <form>
                 <select class="form-select form-select-lg">
                     <option >Thanh toán khi nhận hàng</option>
                     <option >Thanh toán online</option>
                 </select>
                 </form>
-              <ItemCustomer/>
+                <ItemCustomer/>
             <ButtonClick/>  
             </div>
         </div>
