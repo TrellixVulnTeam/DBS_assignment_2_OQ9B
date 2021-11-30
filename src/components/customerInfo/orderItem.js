@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import "./customer.css";
 import priceWithDots from '../products/priceWithDots';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
 
 const cancelOrder = (transID, orderID) => {
@@ -14,6 +20,48 @@ const cancelOrder = (transID, orderID) => {
     }).then((response) => {
         console.log(response);
     }).catch((error) => { console.error(error) })
+}
+
+
+function AlertDialog({ props }) {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    return (
+        <div>
+            <Button variant="outlined" className="cancel-order-btn" onClick={handleClickOpen}>
+                Hủy đơn
+            </Button>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Quý khách có chắc chắn muốn hủy đơn không ?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Hủy đơn quá 5 lần có thể khiến tài khoản của quý khách bị khóa
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => { cancelOrder(props.transID, props.orderID); window.location.reload(); handleClose() }}>Có</Button>
+                    <Button onClick={handleClose} autoFocus>
+                        Không
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }
 
 const userID = JSON.parse(localStorage.getItem('token'));
@@ -67,7 +115,7 @@ function CustomerBtn(props) {
             )
         }
     } else if (props.status === 'PENDING') {
-        return (<button className="btn btn-primary my-4" onClick={() => { cancelOrder(props.transID, props.orderID); window.location.reload() }}>Hủy đơn</button>)
+        return (<AlertDialog props={props} />)
     } else {
         return null;
     }

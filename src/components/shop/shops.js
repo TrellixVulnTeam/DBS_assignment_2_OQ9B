@@ -14,7 +14,7 @@ export default class Shop extends React.Component {
                         <div className="container shop-card-container">
                             <div className="row shop-img-container">
                                 <div className="col-12 col-md-12 col-lg-12">
-                                    <img src={shopImg} alt="shop-img" id={shopOwnerID} className="my-3" />
+                                    <img src="https://www.inlogo.vn/vnt_upload/File/Image/photo_1_1491025784408.jpg" alt="shop-img" id={shopOwnerID} className="my-3" />
                                 </div>
                             </div>
                             <hr />

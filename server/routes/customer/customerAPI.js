@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
                     FROM ${connection.db_name}.shopuser
                     JOIN ${connection.db_name}.customer ON ${connection.db_name}.shopuser.id = ${connection.db_name}.customer.id
                     JOIN ${connection.db_name}.customertype ON ${connection.db_name}.customer.cusTypeID = ${connection.db_name}.customertype.typeID
-                    WHERE ${connection.db_name}.shopuser.id = ?`;
+                    WHERE ${connection.db_name}.shopuser.id = ?;`;
     try {
         connection.connection.query(query, [id], (err, results) => {
             res.status(200).send(results);
@@ -30,7 +30,7 @@ router.get("/orders", async (req, res) => {
                     JOIN ${connection.db_name}.transaction ON ${connection.db_name}.customer.id = ${connection.db_name}.transaction.customerId
                     JOIN ${connection.db_name}.order ON ${connection.db_name}.order.transID = ${connection.db_name}.transaction.transId
                     JOIN ${connection.db_name}.product ON ${connection.db_name}.product.id = ${connection.db_name}.order.productID
-                    WHERE ${connection.db_name}.customer.id = ?`;
+                    WHERE ${connection.db_name}.customer.id = ? ORDER BY ${connection.db_name}.order.orderID`;
     try {
         connection.connection.query(query, [id], (err, results) => {
             res.status(200).send(results);

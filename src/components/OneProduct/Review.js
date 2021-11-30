@@ -130,7 +130,7 @@ function Rating(props) {
     axios.post('http://localhost:5000/products/details/feedback', {
       ownerID: props.shopID,
       customerID: customerID[0].id,
-      productID: props.id,
+      productID: props.prodid,
       content: detail,
       timeReview: getCurrentTime()
     }).then((response) => {
@@ -167,7 +167,7 @@ function Rating(props) {
         />
       </RatingItem>
       <RatingItem>
-        <NormalBtn onClick={handleSubmitClick}> Submit </NormalBtn>
+        <NormalBtn onClick={() => { handleSubmitClick(); window.location.reload(); }}> Submit </NormalBtn>
       </RatingItem>
     </RatingContainer>
   </>
@@ -182,7 +182,7 @@ function Reviews(props) {
           <PaginatedItems itemsPerPage={4} feedback={props.feedback} />
         }
       </ReviewContainer>
-      <Rating id={props.id} shopID={props.shopID} />
+      <Rating prodid={props.id} shopID={props.shopID} />
     </>
   );
 }

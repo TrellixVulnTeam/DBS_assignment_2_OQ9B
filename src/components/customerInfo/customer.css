@@ -49,3 +49,10 @@
 .order-item-container .order-item-btns-container button {
   font-weight: 600;
 }
+
+.cancel-order-btn {
+  position: relative;
+  top: 20px;
+  background-color: red !important;
+  color: #fff !important;
+}

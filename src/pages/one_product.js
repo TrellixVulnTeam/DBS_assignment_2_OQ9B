@@ -8,7 +8,6 @@ import axios from 'axios';
 const ProductInfo = (props) => {
 
   const id = props.match.params.id;
-  const userID = JSON.parse(localStorage.getItem('token'));
 
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,10 +21,9 @@ const ProductInfo = (props) => {
 
 
   const fetchFeedBack = async () => {
-    axios.get('http://localhost:5000/products/details/feedback', {
+    axios.get('http://localhost:5000/products/details/feedback/all_feedbacks', {
       params: {
         productID: id,
-        customerID: userID[0].id
       }
     }).then((response) => {
       setFeedBack(response.data);
