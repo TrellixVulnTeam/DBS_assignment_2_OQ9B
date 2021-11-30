@@ -9,10 +9,13 @@ function loginUser(user) {
     console.log(user);
     return axios.post('http://localhost:5000/login', user)
         .then(data => {
-            if (data.data !== 'Incorrect Username and/or Password!') {
-                console.log(data);
+            if (data.data !== 'Incorrect Username and/or Password!' && data.data !== 'Your account has been locked') {
+                console.log(data.data);
                 return data.data;
-            } else {
+            } else if (data.data === 'Your account has been locked') {
+                alert("Tài khoản của quý khách đã bị khóa");
+            }
+            else if (data.data === 'Incorrect Username and/or Password!') {
                 console.log("Login Failed");
                 alert("Vui lòng nhập đúng tài khoản và mật khẩu");
             }

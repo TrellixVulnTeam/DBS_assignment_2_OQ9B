@@ -14,12 +14,16 @@ router.post('/', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
     if (username && password) {
-        connection.connection.query('SELECT shopuser.id FROM `shopuser` WHERE `account` = ? AND `password` = ?', [username, password], function (error, results, fields) {
+        const query = 'SELECT shopuser.id, customer.cancelTimes FROM `shopuser` JOIN `customer` ON `customer`.id = `shopuser`.id WHERE `account` = ? AND `password` = ?;';
+        connection.connection.query(query, [username, password], function (error, results, fields) {
             if (results.length > 0) {
-                request.session.loggedin = true;
-                request.session.username = username;
+                if (results[0].cancelTimes >= 5) {
+                    response.send('Your account has been locked');
+                    console.log('Your account has been locked');
+                    return;
+                }
                 response.status(200).send(results);
-            } else {
+            } else if (results.length === 0) {
                 response.send('Incorrect Username and/or Password!');
             }
             response.end();

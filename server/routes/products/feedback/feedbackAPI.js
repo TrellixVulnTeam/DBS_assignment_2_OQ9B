@@ -7,6 +7,20 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get("/all_feedbacks", async (req, res) => {
+  const productID = req.query.productID;
+  const query = `SELECT * FROM ${connection.db_name}.review WHERE ${connection.db_name}.review.productID = ? ORDER BY review.timeReview DESC;`
+  connection.connection.query(query, [productID], (err, results) => {
+    if (err) {
+      console.log(err);
+      res.send("FAILED");
+    } else {
+      res.status(200).send(results);
+    }
+  }
+  );
+});
+
 router.get("/", async (req, res) => {
   const productID = req.query.productID;
   const customerID = req.query.customerID;

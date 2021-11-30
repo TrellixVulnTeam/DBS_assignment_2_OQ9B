@@ -42,18 +42,6 @@ export default function FilterBar() {
                                             Giá <i className="fas fa-angle-down" />
                                         </button>
                                     </div>
-                                    <div className="col-sm-3 col-md-3 col-lg-3">
-                                        <button className="btn btn-secondary sort-btn"
-                                            onClick={() => {
-                                                if (value.filterBrandModal || (currentRoutes.pathname !== '/product' && currentRoutes.pathname !== '/product_list')) {
-                                                    value.closeModal("brand");
-                                                } else {
-                                                    value.openModal("brand")
-                                                }
-                                            }}>
-                                            Thương hiệu <i className="fas fa-angle-down" />
-                                        </button>
-                                    </div>
                                 </div>
                             </div>
                             <div className="col-sm-3 col-md-3 col-lg-2">
