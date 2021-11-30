@@ -1,0 +1,88 @@
+<div class="form-group">
+<style>
+    table{
+        display: block;
+        box-shadow: 2px 2px 2px rgb(62, 62, 62);
+        border-radius: 5px;
+        width: 700px;
+    }
+    table,tr,td,th{text-align: left;}
+</style>
+    <table>
+        {{#each data}} 
+        <tr> 
+            <th><h3>Mã giao dịch: </h3></th>
+            <th>{{transID}}</th>
+        </tr>
+        <tr> 
+            <th><h3>Mã đơn hàng: </h3></th>
+            <th>{{orderID}}</th>
+        </tr>
+        <tr><td><img src="{{imageURL}}"></td></tr>
+        <tr> 
+            <th><h3>Tên sản phẩm: </h3></th>
+            <th>{{name}}</th>
+        </tr>
+        <tr> 
+            <th><h3>Giá: </h3></th>
+            <th>{{totalPrice}}</th>
+        </tr>
+        <tr> 
+            <th><h3>Thời gian Đặt hàng: </h3></th>
+            <th>{{paymentTime}}</th>
+        </tr>
+        <tr> 
+            <th><h3>Tình trạng đơn hàng: </h3></th>
+            <th>
+                {{#if (equal status 'processing')}}Đang Xử lý{{/if}}
+                {{#if (equal status 'success')}}Giao hàng thành công {{/if}}
+                {{#if (equal status 'delivery')}}Đang giao{{/if}}
+                {{#if (equal status 'cancel')}}Đã Hủy{{/if}}
+            </th>
+        </tr>
+        <tr> 
+            <th><h3>Phương thức thanh toán: </h3></th>
+            <th>{{method}}</th>
+        </tr>
+        <tr>
+            {{#if (equal status 'processing')}}
+            <td></td>
+            <td><button name="cancel" class="btn btn-primary">Hủy Đơn</button></td>
+            {{/if}}
+        </tr>
+       {{/each}} 
+    </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+    $("button[name=cancel]").click(function(e){
+        var idtr = $(e.target).parent().parent().parent().children('tr').eq(0).children('th').eq(1).text();
+        var idor =$(e.target).parent().parent().parent().children('tr').eq(1).children('th').eq(1).text();
+        if(confirm('Bạn Muốn Hủy đơn hàng này?')){
+            
+            $.ajax({
+                url:"/order/cancel",
+                method: "GET",
+                data:{
+                    IDtrans: idtr,
+                    IDOrder: idor
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data == "Success"){
+                        location.reload();
+                    }
+                }
+            });
+        }
+    });
+</script>
+{{!-- 
+
+
+
+ --}}

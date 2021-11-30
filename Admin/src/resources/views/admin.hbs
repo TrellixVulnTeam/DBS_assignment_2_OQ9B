@@ -1,0 +1,83 @@
+<h1 id="header-main" style="display:None;">Danh sách khách hàng</h1><br>
+<button id="btn-cus-in-month" class="btn btn-success" style="display:None;">Giao dịch trong tháng</button>
+<h1 id="header-month">Giao dịch của khách hàng tháng này</h1>
+<button id="btn-total" class="btn btn-info">Tất cả khách hàng</button>
+<div class="form-group">
+
+    <style>
+    table{
+        display: block;
+        box-shadow: 2px 2px 2px rgb(62, 62, 62);
+        border-radius: 5px;
+        width: 800px;
+        padding: 10px;
+    }
+    table,tr,td,th{
+        margin: 20px;
+        font-size: 20px;
+    }
+    button{
+        height: 70px;
+        width: 120px;
+    }
+    </style>
+    <table id="cus-table-month">
+        <tr> 
+            <th>Tài Khoản</th>
+            <th>Mã Khách Hàng</th>
+            <th>Tổng giá trị giao dịch</th>
+            <th>Số giao dịch</th>
+        </tr>
+       {{#each data}} 
+        <tr>
+            <td>{{account}}</td>
+            <td>{{customerId}}</td>
+            <td>{{TotalTrans}} Đ</td>
+            <td>{{QuantityTrans}}</td>
+        </tr>
+       {{/each}} 
+    </table>
+    <table id="cus-table" style="display:none;width:1200px;">
+        <tr> 
+            <th>ID Khách hàng</th>
+            <th>Tài khoản</th>
+            <th>Tên khách hàng</th>
+            <th>Số điện thoại</th>
+            <th>địa chỉ</th>
+            <th>Email</th>
+            <th>Loại</th>
+        </tr>
+       {{#each cus}} 
+        <tr>
+            <td>{{id}}</td>
+            <td>{{account}}</td>
+            <td>{{lastname}}{{firstname}}</td>
+            <td>{{phonenumber}}</td>
+            <td>{{address}}</td>
+            <td>{{email}}</td>
+            <td>{{typename}}</td>
+        </tr>
+       {{/each}} 
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $('#btn-total').click(function() {
+        $('#header-main').css('display', 'block');
+        $('#header-month').css('display', 'none');
+        $('#cus-table-month').css('display', 'none');
+        $('#cus-table').css('display', 'block');
+        $('#btn-cus-in-month').css('display', 'inline-block');
+        $('#btn-total').css('display', 'none');
+    })
+    $('#btn-cus-in-month').click(function() {
+        $('#header-main').css('display', 'none');
+        $('#header-month').css('display', 'block');
+        $('#cus-table-month').css('display', 'block');
+        $('#cus-table').css('display', 'none');
+        $('#btn-cus-in-month').css('display', 'none');
+        $('#btn-total').css('display', 'inline-block');
+    })
+</script>
